@@ -1,0 +1,6 @@
+# compilation
+build/*.o
+game
+
+# vscode
+.vscode
