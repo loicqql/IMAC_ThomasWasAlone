@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "class/Map/Map.hpp"
+#include "class/Player/Player.hpp"
 
 /* Dimensions initiales et titre de la fenetre */
 static const unsigned int WINDOW_WIDTH = 800;
@@ -101,6 +101,8 @@ int main(int argc, char** argv) {
   
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
 
+
+    Player player;
   
     /* Boucle principale */
     int loop = 1;
@@ -112,7 +114,10 @@ int main(int argc, char** argv) {
         glClear(GL_COLOR_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        
+
+        /* le vrai main */
+        player.render();
+
         /* Echange du front et du back buffer : mise a jour de la fenetre */
         SDL_GL_SwapWindow(window);
         

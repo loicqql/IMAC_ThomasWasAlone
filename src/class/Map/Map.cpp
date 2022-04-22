@@ -6,6 +6,4 @@ Map::Map() {
   
 }
 
-void Map::test() {
-  cout << "dd";
-}
+void Map::test() {}
