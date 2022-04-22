@@ -5,7 +5,6 @@ using namespace std;
 Vector::Vector(float ux, float uy) {
     x = ux;
     y = uy;
-    z = 0.0;
 }
 
 float Vector::getX() {
@@ -14,4 +13,14 @@ float Vector::getX() {
 
 float Vector::getY() {
     return y;
+}
+
+void Vector::add(Vector vec) {
+    x += vec.getX();
+    y += vec.getY();
+}
+
+void Vector::subtract(Vector vec) {
+    x -= vec.getX();
+    y -= vec.getY();
 }

@@ -1,7 +1,10 @@
 #pragma once
 
+#include <iostream>
+
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Color/Color.hpp"
+#include "../utils/Box/Box.hpp"
 
 using namespace std;
 
@@ -10,9 +13,16 @@ class Player {
 		Player();
 
 		void render();
+		void move(Vector *vecInput);
 		
 	private:
         Vector *pos;
-        Vector *dim;
         Color *color;
+		Box *box;
+		float w;
+		float h;
+		float ax;
+		float ay;
+
+		bool collision();
 };

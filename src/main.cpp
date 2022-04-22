@@ -5,7 +5,13 @@
 #include <stdio.h>
 #include <math.h>
 
+#include <iostream>
+
 #include "class/Player/Player.hpp"
+#include "class/utils/Vector/Vector.hpp"
+
+Player player;
+Vector * vecInput;
 
 /* Dimensions initiales et titre de la fenetre */
 static const unsigned int WINDOW_WIDTH = 800;
@@ -101,8 +107,7 @@ int main(int argc, char** argv) {
   
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-
-    Player player;
+    vecInput = new Vector(0.0, 0.0);
   
     /* Boucle principale */
     int loop = 1;
@@ -116,7 +121,10 @@ int main(int argc, char** argv) {
         glLoadIdentity();
 
         /* le vrai main */
+        player.move(vecInput);
         player.render();
+
+        vecInput = nullptr;
 
         /* Echange du front et du back buffer : mise a jour de la fenetre */
         SDL_GL_SwapWindow(window);
@@ -130,7 +138,7 @@ int main(int argc, char** argv) {
 				break;
 			}
 		
-			if(	e.type == SDL_KEYDOWN && (e.key.keysym.sym == SDLK_q || e.key.keysym.sym == SDLK_ESCAPE)) {
+			if(	e.type == SDL_KEYDOWN && (e.key.keysym.sym == SDLK_ESCAPE)) {
 				loop = 0; 
 				break;
 			}
@@ -150,12 +158,20 @@ int main(int argc, char** argv) {
 
                 /* Clic souris */
                 case SDL_MOUSEBUTTONUP:
-                    printf("clic en (%d, %d)\n", e.button.x, e.button.y);
+                    //vecInput = new Vector(0.0, 10.0);
                     break;
                 
                 /* Touche clavier */
                 case SDL_KEYDOWN:
-                    printf("touche pressee (code = %d)\n", e.key.keysym.sym);
+                    if(e.key.keysym.sym == SDLK_q) {
+                        vecInput = new Vector(-10.0, 0.0);
+                    }
+                    if(e.key.keysym.sym == SDLK_d) {
+                        vecInput = new Vector(10.0, 0.0);
+                    }
+                    if(e.key.keysym.sym == SDLK_z) {
+                        vecInput = new Vector(0.0, 10.0);
+                    }
                     break;
                     
                 default:
@@ -168,6 +184,10 @@ int main(int argc, char** argv) {
         /* Si trop peu de temps s'est ecoule, on met en pause le programme */
         if(elapsedTime < FRAMERATE_MILLISECONDS) {
             SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
+        }
+
+        if(vecInput == nullptr) {
+            vecInput = new Vector(0.0, 0.0);
         }
     }
 
