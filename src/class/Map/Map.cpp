@@ -33,19 +33,19 @@ float Map::getD(){
 }
 
 Map Map::getChildA(){
-    return childA;
+    return *childA;
 }
 
 Map Map::getChildB(){
-    return childB;
+    return *childB;
 }
 
 Map Map::getChildC(){
-    return childC;
+    return *childC;
 }
 
 Map Map::getChildD(){
-    return childD;
+    return *childD;
 }
 
 bool Map::isLeaf(){
@@ -55,6 +55,6 @@ bool Map::isLeaf(){
     return false;
 }
 
-Elt getElts(){
-    return props;
+Elt Map::getElts(){
+    return *elts;
 }

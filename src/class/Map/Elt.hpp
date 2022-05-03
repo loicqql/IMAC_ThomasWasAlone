@@ -4,7 +4,7 @@ using namespace std;
 
 class Elt {
 	public:
-		Map(float x, float y, float w, float h);
+		Elt(float x, float y, float w, float h);
 
 		float getX();
 		float getY();
