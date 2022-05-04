@@ -8,9 +8,11 @@
 #include <iostream>
 
 #include "class/Player/Player.hpp"
+#include "class/Map/Map.hpp"
 #include "class/utils/Vector/Vector.hpp"
 
 Player player;
+Map *map = new Map();
 Vector * vecInput;
 
 /* Dimensions initiales et titre de la fenetre */
@@ -92,8 +94,7 @@ int main(int argc, char** argv) {
 
         context = SDL_GL_CreateContext(window);
     
-        if(NULL == context) 
-        {
+        if(NULL == context) {
             const char* error = SDL_GetError();
             fprintf(
                 stderr,
@@ -121,7 +122,7 @@ int main(int argc, char** argv) {
         glLoadIdentity();
 
         /* le vrai main */
-        player.move(vecInput);
+        player.move(vecInput, map);
         player.render();
 
         vecInput = nullptr;
@@ -161,7 +162,7 @@ int main(int argc, char** argv) {
                     //vecInput = new Vector(0.0, 10.0);
                     break;
                 
-                /* Touche clavier */
+                /* Touche clavier
                 case SDL_KEYDOWN:
                     if(e.key.keysym.sym == SDLK_q) {
                         vecInput = new Vector(-10.0, 0.0);
@@ -176,7 +177,19 @@ int main(int argc, char** argv) {
                     
                 default:
                     break;
+                     */
             }
+        }
+
+        const Uint8* keystates = SDL_GetKeyboardState(NULL);
+        if(keystates[SDL_SCANCODE_LEFT]) {
+            vecInput = new Vector(-5.0, 0.0);
+        }
+        if(keystates[SDL_SCANCODE_RIGHT]) {
+            vecInput = new Vector(5.0, 0.0);
+        }
+        if(keystates[SDL_SCANCODE_SPACE]) {
+            vecInput = new Vector(0.0, 5.0);
         }
 
         /* Calcul du temps ecoule */

@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "../Map/Map.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Color/Color.hpp"
 #include "../utils/Box/Box.hpp"
@@ -13,7 +14,7 @@ class Player {
 		Player();
 
 		void render();
-		void move(Vector *vecInput);
+		void move(Vector *vecInput, Map *map);
 		
 	private:
         Vector *pos;
