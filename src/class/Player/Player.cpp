@@ -6,6 +6,7 @@ Player::Player() {
 	pos = new Vector(0.0, 0.0);
 	color = new Color(1.0, 1.0, 1.0);
 	box = new Box(5.0, 5.0, pos->getX(), pos->getY());
+	canJump = false;
 	w = 5.0;
 	h = 5.0;
 	ax = 0.0;
@@ -25,11 +26,17 @@ void Player::render() {
   glEnd();
 }
 
-void Player::move(Vector *vecInput, Map *map) {
+void Player::move(Vector *vecInput) {
 
 	ax = vecInput->getX() != 0 ? vecInput->getX() : ax;
-	ay = vecInput->getY() != 0 ? vecInput->getY() : ay;
 
+	if(canJump) {
+		ay = vecInput->getY() != 0 ? vecInput->getY() : ay;
+		if(vecInput->getY() != 0) {
+			canJump = false;
+		}
+	}
+	
 	if(!collision()) {
 		ay -= 0.5;
 	} else {
@@ -73,50 +80,60 @@ bool Player::collision() {
 		glVertex2d(0.0 - hW, -50.0 + hH);
 	glEnd();
 
+	hW = 50.0 / 2;
+	hH = 50.0 / 2;
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
-		glVertex2d(0.0 + hW, 20.0  + hH);
-		glVertex2d(0.0 + hW, 20.0 - hH);
-		glVertex2d(0.0 - hW, 20.0  - hH);
-		glVertex2d(0.0 - hW, 20.0 + hH);
+		glVertex2d(-30.0 + hW, -20.0 + hH);
+		glVertex2d(-30.0 + hW, -20.0 - hH);
+		glVertex2d(-30.0 - hW, -20.0 - hH);
+		glVertex2d(-30.0 - hW, -20.0 + hH);
 	glEnd();
 
-	Box * boxA[2];
+
 	Box * box1 = new Box(100.0, 5.0, 0.0, -50.0);
-	boxA[0] = box1;
-	Box * box2 = new Box(100.0, 5.0, 0.0, 20.0);
-	boxA[1] = box2;
+	Box * box2 = new Box(50.0, 50.0, -30.0, -20.0);
 
-	for (int i = 0; i < 2; i++) {
-		Box * oneBox = boxA[i];
+	
 
-		if(box->getY() > oneBox->getY()) {
-			if((box->getY() - box->getH() / 2) < (oneBox->getY() + oneBox->getH() / 2)) {
-				return true;
-			}
-		}
-
-		if(box->getX() > oneBox->getX()) {
-			if((box->getX() - box->getW() / 2) < (oneBox->getX() + oneBox->getW() / 2)) {
-				return true;
-			}
-		}
-
-		if(box->getY() < oneBox->getY()) {
-			if((box->getY() + box->getH() / 2) > (oneBox->getY() - oneBox->getH() / 2)) {
-				return true;
-			}
-		}
-
-		if(box->getX() < oneBox->getX()) {
-			if((box->getX() + box->getW() / 2) > (oneBox->getX() - oneBox->getW() / 2)) {
-				return true;
-			}
-		}
-		
+	if(resetJump(box, box1)) {
+		canJump = true;
 	}
 
-	return false;
+	if(resetJump(box, box2)) {
+		canJump = true;
+	}
+
+	if(testCollision(box, box1)) {
+		return true;
+	}
+	if(testCollision(box, box2)) {
+		return true;
+	}
+
+	return false;	
   
+}
+
+bool Player::testCollision(Box * box1, Box * box2) {
+
+	if(
+		(box1->getX() - (box1->getW() / 2) >= box2->getX() + (box2->getW() / 2)) || //test droite
+		(box1->getX() + (box1->getW() / 2) <= box2->getX() - (box2->getW() / 2)) || //test gauche
+		(box1->getY() - (box1->getH() / 2) >= box2->getY() + (box2->getH() / 2)) || //test haut
+		(box1->getY() + (box1->getH() / 2) <= box2->getY() - (box2->getH() / 2))    //test bas
+	) {
+		return false;
+
+	} else {
+		return true;
+	}
+}
+
+bool Player::resetJump(Box * player, Box * box) {
+	if(player->getY() - (player->getH() / 2) == box->getY() + (box->getH() / 2)) {
+		return true;
+	}
+	return false;
 }
 

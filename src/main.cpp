@@ -12,7 +12,6 @@
 #include "class/utils/Vector/Vector.hpp"
 
 Player player;
-Map *map = new Map();
 Vector * vecInput;
 
 /* Dimensions initiales et titre de la fenetre */
@@ -122,7 +121,7 @@ int main(int argc, char** argv) {
         glLoadIdentity();
 
         /* le vrai main */
-        player.move(vecInput, map);
+        player.move(vecInput);
         player.render();
 
         vecInput = nullptr;
