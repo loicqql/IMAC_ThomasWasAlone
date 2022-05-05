@@ -14,6 +14,10 @@ class Player {
 
 		void render();
 		void move(Vector *vecInput);
+		Vector * getPos();
+		void setDelta(Vector * delta);
+		void setColor(Color * newColor);
+		void drawTriangle();
 		
 	private:
         Vector *pos;
@@ -24,8 +28,9 @@ class Player {
 		float ax;
 		float ay;
 		bool canJump;
+		char col;
+		Vector * deltaCamera;
 
 		bool collision();
-		bool testCollision(Box * box1, Box * box2);
-		bool resetJump(Box * player, Box * box);
+		char getCollision(Box * player, Box * box);
 };

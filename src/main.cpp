@@ -7,11 +7,10 @@
 
 #include <iostream>
 
-#include "class/Player/Player.hpp"
-#include "class/Map/Map.hpp"
+#include "class/Game/Game.hpp"
 #include "class/utils/Vector/Vector.hpp"
 
-Player player;
+Game game;
 Vector * vecInput;
 
 /* Dimensions initiales et titre de la fenetre */
@@ -121,8 +120,8 @@ int main(int argc, char** argv) {
         glLoadIdentity();
 
         /* le vrai main */
-        player.move(vecInput);
-        player.render();
+        game.movePlayer(vecInput);
+        game.render();
 
         vecInput = nullptr;
 
@@ -161,22 +160,15 @@ int main(int argc, char** argv) {
                     //vecInput = new Vector(0.0, 10.0);
                     break;
                 
-                /* Touche clavier
+                /* Touche clavier */
                 case SDL_KEYDOWN:
-                    if(e.key.keysym.sym == SDLK_q) {
-                        vecInput = new Vector(-10.0, 0.0);
-                    }
-                    if(e.key.keysym.sym == SDLK_d) {
-                        vecInput = new Vector(10.0, 0.0);
-                    }
-                    if(e.key.keysym.sym == SDLK_z) {
-                        vecInput = new Vector(0.0, 10.0);
+                    if(e.key.keysym.sym == 9) {
+                        game.switchPlayer();
                     }
                     break;
                     
                 default:
-                    break;
-                     */
+                    break;         
             }
         }
 

@@ -3,16 +3,22 @@ CFLAGS= -Wall -O2 -g
 CFLAGSDEBUG=-DDEBUG -g
 LDFLAGS	= -lSDL2 -lGLU -lGL -lm
 
-game: build/main.o build/map.o build/player.o build/vector.o build/color.o build/box.o
+game: build/main.o build/game.o build/map.o build/player.o build/camera.o build/vector.o build/color.o build/box.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 build/main.o: src/main.cpp
+	$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
+
+build/game.o: src/class/Game/Game.cpp src/class/Game/Game.hpp
 	$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
 
 build/map.o: src/class/Map/Map.cpp src/class/Map/Map.hpp
 	$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
 
 build/player.o: src/class/Player/Player.cpp src/class/Player/Player.hpp
+	$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
+
+build/camera.o: src/class/Camera/Camera.cpp src/class/Camera/Camera.hpp
 	$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
 
 build/vector.o: src/class/utils/Vector/Vector.cpp src/class/utils/Vector/Vector.hpp

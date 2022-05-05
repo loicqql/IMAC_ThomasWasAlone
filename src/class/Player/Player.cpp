@@ -11,22 +11,71 @@ Player::Player() {
 	h = 5.0;
 	ax = 0.0;
 	ay = 0.0;
+	deltaCamera = new Vector(0.0, 0.0);
+}
+
+Vector * Player::getPos() {
+	return pos;
+}
+
+void Player::setDelta(Vector * delta) {
+	deltaCamera = delta;
+}
+
+void Player::setColor(Color * newColor) {
+	color = newColor;
 }
 
 void Player::render() {
-  float hW = w / 2;
-  float hH = h / 2;
 
-  glColor3f(color->getR(), color->getG(), color->getB());
-  glBegin(GL_POLYGON);
-      glVertex2d(pos->getX() + hW, pos->getY()  + hH);
-      glVertex2d(pos->getX() + hW, pos->getY() - hH);
-      glVertex2d(pos->getX()- hW, pos->getY()  - hH);
-      glVertex2d(pos->getX()- hW, pos->getY() + hH);
-  glEnd();
+	float hW = w / 2;
+	float hH = h / 2;
+
+	glColor3f(color->getR(), color->getG(), color->getB());
+	glBegin(GL_POLYGON);
+		glVertex2d(pos->getX() + hW - deltaCamera->getX(),  pos->getY() + hH - deltaCamera->getY());
+		glVertex2d(pos->getX() + hW - deltaCamera->getX(),  pos->getY() - hH - deltaCamera->getY());
+		glVertex2d(pos->getX() - hW - deltaCamera->getX(),  pos->getY() - hH - deltaCamera->getY());
+		glVertex2d(pos->getX() - hW - deltaCamera->getX(),  pos->getY() + hH - deltaCamera->getY());
+	glEnd();
+
+	//RENDER BOX TEMP
+
+	Box * box1 = new Box(2000.0, 5.0, 0.0 - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
+	Box * box2 = new Box(50.0, 50.0, (-30.0) - deltaCamera->getX(), (-20.0) - deltaCamera->getY());
+
+	Box * boxA[2];
+	boxA[0] = box1;
+	boxA[1] = box2;
+
+	for (int i = 0; i < 2; i++) {
+		Box * oneBox = boxA[0];
+
+		hW = oneBox->getW() / 2;
+		hH = oneBox->getH() / 2;
+		glColor3f(1.0, 1.0, 1.0);
+		glBegin(GL_POLYGON);
+			glVertex2d(oneBox->getX() + hW, oneBox->getY() + hH);
+			glVertex2d(oneBox->getX() + hW, oneBox->getY() - hH);
+			glVertex2d(oneBox->getX() - hW, oneBox->getY() - hH);
+			glVertex2d(oneBox->getX() - hW, oneBox->getY() + hH);
+		glEnd();
+
+	}
 }
 
-void Player::move(Vector *vecInput) {
+void Player::drawTriangle() {
+	float hW = 3 / 2;
+	float hH = 2 / 2;
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_POLYGON);
+		glVertex2d(pos->getX() + hW - deltaCamera->getX(), 	pos->getY() + hH - deltaCamera->getY() + (h / 2) + 2);
+		glVertex2d(pos->getX() - deltaCamera->getX(),  pos->getY() - hH - deltaCamera->getY() + (h / 2) + 2);
+		glVertex2d(pos->getX() - hW - deltaCamera->getX(),  pos->getY() + hH - deltaCamera->getY() + (h / 2) + 2);
+	glEnd();
+}
+
+void Player::move(Vector *vecInput) {	
 
 	ax = vecInput->getX() != 0 ? vecInput->getX() : ax;
 
@@ -36,12 +85,14 @@ void Player::move(Vector *vecInput) {
 			canJump = false;
 		}
 	}
-	
+
 	if(!collision()) {
 		ay -= 0.5;
 	} else {
 		ay = 0.0;
 	}
+
+	// cout << col << endl;
 	
 	if(ax > 0) {
 		ax -= 0.5;
@@ -70,70 +121,48 @@ void Player::move(Vector *vecInput) {
 
 bool Player::collision() {
 
-	float hW = 100.0 / 2;
-	float hH = 5.0 / 2;
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_POLYGON);
-		glVertex2d(0.0 + hW, -50.0  + hH);
-		glVertex2d(0.0 + hW, -50.0 - hH);
-		glVertex2d(0.0 - hW, -50.0  - hH);
-		glVertex2d(0.0 - hW, -50.0 + hH);
-	glEnd();
-
-	hW = 50.0 / 2;
-	hH = 50.0 / 2;
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_POLYGON);
-		glVertex2d(-30.0 + hW, -20.0 + hH);
-		glVertex2d(-30.0 + hW, -20.0 - hH);
-		glVertex2d(-30.0 - hW, -20.0 - hH);
-		glVertex2d(-30.0 - hW, -20.0 + hH);
-	glEnd();
-
-
-	Box * box1 = new Box(100.0, 5.0, 0.0, -50.0);
-	Box * box2 = new Box(50.0, 50.0, -30.0, -20.0);
-
+	//get from map
+	Box * box1 = new Box(2000.0, 5.0, 0.0, (-50.0));
+	Box * box2 = new Box(50.0, 50.0, (-30.0), (-20.0));
 	
+	Box * boxA[2];
+	boxA[0] = box1;
+	boxA[1] = box2;
 
-	if(resetJump(box, box1)) {
-		canJump = true;
-	}
+	for (int i = 0; i < 2; i++) {
+		Box * oneBox = boxA[0];
 
-	if(resetJump(box, box2)) {
-		canJump = true;
-	}
+		col = getCollision(box, oneBox);
+		if(col == 'b') {
+			canJump = true;
+		}
 
-	if(testCollision(box, box1)) {
-		return true;
-	}
-	if(testCollision(box, box2)) {
-		return true;
+		if(!(
+		(box->getX() - (box->getW() / 2) >= oneBox->getX() + (oneBox->getW() / 2)) || //test droite
+		(box->getX() + (box->getW() / 2) <= oneBox->getX() - (oneBox->getW() / 2)) || //test gauche
+		(box->getY() - (box->getH() / 2) >= oneBox->getY() + (oneBox->getH() / 2)) || //test haut
+		(box->getY() + (box->getH() / 2) <= oneBox->getY() - (oneBox->getH() / 2))    //test bas
+		)) {
+			return true;
+		}
 	}
 
 	return false;	
   
 }
 
-bool Player::testCollision(Box * box1, Box * box2) {
-
-	if(
-		(box1->getX() - (box1->getW() / 2) >= box2->getX() + (box2->getW() / 2)) || //test droite
-		(box1->getX() + (box1->getW() / 2) <= box2->getX() - (box2->getW() / 2)) || //test gauche
-		(box1->getY() - (box1->getH() / 2) >= box2->getY() + (box2->getH() / 2)) || //test haut
-		(box1->getY() + (box1->getH() / 2) <= box2->getY() - (box2->getH() / 2))    //test bas
-	) {
-		return false;
-
-	} else {
-		return true;
+char Player::getCollision(Box * player, Box * box) {
+	if(player->getX() - (player->getW() / 2) == box->getX() + (box->getW() / 2)) {
+		return 'l';
 	}
-}
-
-bool Player::resetJump(Box * player, Box * box) {
+	if(player->getX() + (player->getW() / 2) == box->getX() - (box->getW() / 2)) {
+		return 'r';
+	}
 	if(player->getY() - (player->getH() / 2) == box->getY() + (box->getH() / 2)) {
-		return true;
+		return 'b';
 	}
-	return false;
+	if(player->getY() + (player->getH() / 2) == box->getY() - (box->getH() / 2)) {
+		return 't';
+	}
+	return '#';
 }
-
