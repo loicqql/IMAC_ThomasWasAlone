@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../Player/Player.hpp"
+#include "../Block/Block.hpp"
 #include "../Camera/Camera.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Draw/Draw.hpp"
@@ -24,6 +25,6 @@ class Game {
 		Draw draw;
 		Vector * deltaCamera;
 		int playerNum;
-		vector <Box*> boxs;
+		vector <Block*> blocks;
 
 };

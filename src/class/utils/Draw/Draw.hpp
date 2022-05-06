@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../Block/Block.hpp"
 #include "../Box/Box.hpp"
 #include "../Color/Color.hpp"
 #include "../Vector/Vector.hpp"
@@ -12,10 +13,10 @@ class Draw {
 	public:
 		Draw();
 
-        void setDelta(Vector * delta);
-        void render(vector <Box*> boxs);
-        void render(Box * oneBox);      
+		void setDelta(Vector * delta);
+		void render(vector <Block*> blocks);
+		void render(Block * block);      
 
 	private:
-        Vector * deltaCamera;
+		Vector * deltaCamera;
 };

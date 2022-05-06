@@ -4,10 +4,12 @@ using namespace std;
 
 Collision::Collision() {}
 
-bool Collision::testCollision(Box * player, vector <Box*> boxs, int playerNumber) {
+bool Collision::testCollision(Box * player, vector <Block*> blocks, int playerNumber) {
 
-	for(int i = 0; i < boxs.size(); ++i) {
-        Box * oneBox = boxs[i];
+	for(int i = 0; i < blocks.size(); ++i) {
+        Block * block = blocks[i];
+        Box * oneBox = block->getBox();
+        
         if(i != playerNumber) { // not test collision itself
             // col = getCollision(box, oneBox);
             // if(col == 'b') {
@@ -29,10 +31,13 @@ bool Collision::testCollision(Box * player, vector <Box*> boxs, int playerNumber
   
 }
 
-char Collision::getCollision(Box * player, vector <Box*> boxs, int playerNumber) {
+char Collision::getCollision(Box * player, vector <Block*> blocks, int playerNumber) {
 
-    for(int i = 0; i < boxs.size(); ++i) {
-        Box * oneBox = boxs[i];
+
+    for(int i = 0; i < blocks.size(); ++i) {
+        Block * block = blocks[i];
+        Box * oneBox = block->getBox();
+
         if(i != playerNumber) { // not test collision itself
 
             if(player->getX() - (player->getW() / 2) == oneBox->getX() + (oneBox->getW() / 2)) {

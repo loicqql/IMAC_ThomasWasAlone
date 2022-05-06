@@ -8,9 +8,11 @@ void Draw::setDelta(Vector * delta) {
 	deltaCamera = delta;
 }
 
-void Draw::render(vector <Box*> boxs) {
-    for(int i = 4; i < boxs.size(); ++i) {
-        Box * oneBox = boxs[i];
+void Draw::render(vector <Block*> blocks) {
+    for(int i = 4; i < blocks.size(); ++i) {
+        Block * block = blocks[i];
+        Box * oneBox = block->getBox();
+
 		float hW = oneBox->getW() / 2;
 		float hH = oneBox->getH() / 2;
 		glColor3f(1.0, 1.0, 1.0);
@@ -23,7 +25,8 @@ void Draw::render(vector <Box*> boxs) {
 	}
 }
 
-void Draw::render(Box * oneBox) {
+void Draw::render(Block * block) {
+    Box * oneBox = block->getBox();
     float hW = oneBox->getW() / 2;
     float hH = oneBox->getH() / 2;
     glColor3f(1.0, 1.0, 1.0);

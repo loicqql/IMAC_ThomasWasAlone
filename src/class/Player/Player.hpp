@@ -4,6 +4,7 @@
 
 #include <vector>
 
+#include "../Block/Block.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Color/Color.hpp"
 #include "../utils/Box/Box.hpp"
@@ -21,7 +22,7 @@ class Player {
 		void setDelta(Vector * delta);
 		void setColor(Color * newColor);
 		void drawTriangle();
-		void setBoxs(vector <Box*> bs);
+		void setBlocks(vector <Block*> blks);
 		Box * getBox();
 		void setPos(Vector * vecPos);
 		void setPlayerNumber(int nb);
@@ -37,7 +38,7 @@ class Player {
 		bool canJump;
 		Vector * deltaCamera;
 		Collision collision;
-		vector <Box*> boxs;
+		vector <Block*> blocks;
 		int playerNumber;
 
 };

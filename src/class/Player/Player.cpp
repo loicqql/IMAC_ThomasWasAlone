@@ -28,8 +28,8 @@ Vector * Player::getPos() {
 	return pos;
 }
 
-void Player::setBoxs(vector <Box*> bs) {
-	boxs = bs;
+void Player::setBlocks(vector <Block*> blks) {
+	blocks = blks;
 }
 
 Box * Player::getBox() {
@@ -81,13 +81,13 @@ void Player::move(Vector *vecInput) {
 		}
 	}
 
-	if(!collision.testCollision(box, boxs, playerNumber)) {
+	if(!collision.testCollision(box, blocks, playerNumber)) {
 		ay -= 0.5;
 	} else {
 		ay = 0.0;
 	}
 
-	if(collision.getCollision(box, boxs, playerNumber) == 'b') {
+	if(collision.getCollision(box, blocks, playerNumber) == 'b') {
 		canJump = true;
 	}
 	
@@ -111,59 +111,11 @@ void Player::move(Vector *vecInput) {
 	cout << ay << endl;
 	cout << "-----" << endl;*/
 
-	if(collision.testCollision(box, boxs, playerNumber)) {
+	if(collision.testCollision(box, blocks, playerNumber)) {
 		pos->subtract(d);
 	}
 
-	if(collision.getCollision(box, boxs, playerNumber) == 'b') {
+	if(collision.getCollision(box, blocks, playerNumber) == 'b') {
 		canJump = true;
 	}
 }
-
-// bool Player::collision() {
-
-// 	//get from map
-// 	Box * box1 = new Box(2000.0, 5.0, 0.0 - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
-// 	Box * box2 = new Box(50.0, 50.0, (-30.0) - deltaCamera->getX(), (-20.0) - deltaCamera->getY());
-	
-// 	Box * boxA[2];
-// 	boxA[0] = box1;
-// 	boxA[1] = box2;
-
-// 	for (int i = 0; i < 2; i++) {
-// 		Box * oneBox = boxA[i];
-
-// 		col = getCollision(box, oneBox);
-// 		if(col == 'b') {
-// 			canJump = true;
-// 		}
-
-// 		if(!(
-// 		(box->getX() - (box->getW() / 2) >= oneBox->getX() + (oneBox->getW() / 2)) || //test droite
-// 		(box->getX() + (box->getW() / 2) <= oneBox->getX() - (oneBox->getW() / 2)) || //test gauche
-// 		(box->getY() - (box->getH() / 2) >= oneBox->getY() + (oneBox->getH() / 2)) || //test haut
-// 		(box->getY() + (box->getH() / 2) <= oneBox->getY() - (oneBox->getH() / 2))    //test bas
-// 		)) {
-// 			return true;
-// 		}
-// 	}
-
-// 	return false;	
-  
-// }
-
-// char Player::getCollision(Box * player, Box * box) {
-// 	if(player->getX() - (player->getW() / 2) == box->getX() + (box->getW() / 2)) {
-// 		return 'l';
-// 	}
-// 	if(player->getX() + (player->getW() / 2) == box->getX() - (box->getW() / 2)) {
-// 		return 'r';
-// 	}
-// 	if(player->getY() - (player->getH() / 2) == box->getY() + (box->getH() / 2)) {
-// 		return 'b';
-// 	}
-// 	if(player->getY() + (player->getH() / 2) == box->getY() - (box->getH() / 2)) {
-// 		return 't';
-// 	}
-// 	return '#';
-// }
