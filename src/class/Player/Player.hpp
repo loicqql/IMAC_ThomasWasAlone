@@ -2,9 +2,12 @@
 
 #include <iostream>
 
+#include <vector>
+
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Color/Color.hpp"
 #include "../utils/Box/Box.hpp"
+#include "../utils/Collision/Collision.hpp"
 
 using namespace std;
 
@@ -18,6 +21,10 @@ class Player {
 		void setDelta(Vector * delta);
 		void setColor(Color * newColor);
 		void drawTriangle();
+		void setBoxs(vector <Box*> bs);
+		Box * getBox();
+		void setPos(Vector * vecPos);
+		void setPlayerNumber(int nb);
 		
 	private:
         Vector *pos;
@@ -28,9 +35,9 @@ class Player {
 		float ax;
 		float ay;
 		bool canJump;
-		char col;
 		Vector * deltaCamera;
+		Collision collision;
+		vector <Box*> boxs;
+		int playerNumber;
 
-		bool collision();
-		char getCollision(Box * player, Box * box);
 };

@@ -174,10 +174,10 @@ int main(int argc, char** argv) {
 
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
         if(keystates[SDL_SCANCODE_LEFT]) {
-            vecInput = new Vector(-5.0, 0.0);
+            vecInput = new Vector(-3.0, 0.0);
         }
         if(keystates[SDL_SCANCODE_RIGHT]) {
-            vecInput = new Vector(5.0, 0.0);
+            vecInput = new Vector(3.0, 0.0);
         }
         if(keystates[SDL_SCANCODE_SPACE]) {
             vecInput = new Vector(0.0, 5.0);

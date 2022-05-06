@@ -7,6 +7,10 @@ Camera::Camera() {
     delta = new Vector(0,0);
 }
 
+Vector * Camera::getDelta() {
+    return delta;
+}
+
 Vector * Camera::playerMove(Vector * vecPos) {
 
     //x1

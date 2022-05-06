@@ -1,10 +1,12 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 
 #include "../Player/Player.hpp"
 #include "../Camera/Camera.hpp"
 #include "../utils/Vector/Vector.hpp"
+#include "../utils/Draw/Draw.hpp"
 
 using namespace std;
 
@@ -19,7 +21,9 @@ class Game {
 	private:
         Player players[4];
 		Camera camera;
+		Draw draw;
 		Vector * deltaCamera;
 		int playerNum;
+		vector <Box*> boxs;
 
 };

@@ -15,8 +15,8 @@ class Camera {
 	public:
 		Camera();
 
-		void getDelta();
 		Vector * playerMove(Vector * vecPos);
+		Vector * getDelta();
 		
 	private:
         Vector * delta;
