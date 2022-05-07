@@ -9,6 +9,9 @@ class Vector {
         
         float getX();
         float getY();
+        float getZ();
+
+        void setZ(float nb);
 
         void add(Vector vec);
         void subtract(Vector vec); 
@@ -16,4 +19,5 @@ class Vector {
 	private:
         float x;
         float y;
+        float z;
 };

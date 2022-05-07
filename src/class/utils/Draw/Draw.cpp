@@ -17,10 +17,10 @@ void Draw::render(vector <Block*> blocks) {
 		float hH = oneBox->getH() / 2;
 		glColor3f(1.0, 1.0, 1.0);
 		glBegin(GL_POLYGON);
-			glVertex2d(oneBox->getX() + hW - deltaCamera->getX(), oneBox->getY() + hH - deltaCamera->getY());
-			glVertex2d(oneBox->getX() + hW - deltaCamera->getX(), oneBox->getY() - hH - deltaCamera->getY());
-			glVertex2d(oneBox->getX() - hW - deltaCamera->getX(), oneBox->getY() - hH - deltaCamera->getY());
-			glVertex2d(oneBox->getX() - hW - deltaCamera->getX(), oneBox->getY() + hH - deltaCamera->getY());
+			glVertex2d((oneBox->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
+			glVertex2d((oneBox->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+			glVertex2d((oneBox->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+			glVertex2d((oneBox->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
 		glEnd();
 	}
 }
@@ -31,9 +31,9 @@ void Draw::render(Block * block) {
     float hH = oneBox->getH() / 2;
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
-        glVertex2d(oneBox->getX() + hW - deltaCamera->getX(), oneBox->getY() + hH - deltaCamera->getY());
-        glVertex2d(oneBox->getX() + hW - deltaCamera->getX(), oneBox->getY() - hH - deltaCamera->getY());
-        glVertex2d(oneBox->getX() - hW - deltaCamera->getX(), oneBox->getY() - hH - deltaCamera->getY());
-        glVertex2d(oneBox->getX() - hW - deltaCamera->getX(), oneBox->getY() + hH - deltaCamera->getY());
+        glVertex2d((oneBox->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
+        glVertex2d((oneBox->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+        glVertex2d((oneBox->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+		glVertex2d((oneBox->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
     glEnd();
 }

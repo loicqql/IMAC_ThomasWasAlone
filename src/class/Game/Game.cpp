@@ -17,10 +17,15 @@ Game::Game() {
     players[3].setColor(new Color(0.5, 0.5, 0.5));
 
     //TEMP get from map
-    Box * box1 = new Box(2000.0, 5.0, 0.0 - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
-	Box * box2 = new Box(50.0, 50.0, (-30.0) - deltaCamera->getX(), (-20.0) - deltaCamera->getY());
-	blocks.push_back(new Block(box1));
-    blocks.push_back(new Block(box2));
+    Box * box1 = new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box1));
+	Box * box2 = new Box(30.0, 5.0, (-50.0) - deltaCamera->getX(), (-45.0) - deltaCamera->getY());
+
+    Block * aBlock = new Block(box2);
+    aBlock->setPosA(new Vector(-50.0, -45.0));
+    aBlock->setPosB(new Vector(50.0, 20.0));
+    aBlock->setSteps(1000.0);
+    blocks.push_back(aBlock);
 
     //set Delta to everyone
     draw.setDelta(deltaCamera);
@@ -50,7 +55,15 @@ void Game::render() {
 
     players[playerNum].drawTriangle();
 
+    for(int i = 4; i < blocks.size(); ++i) {
+        Block * block = blocks[i];
+        block->updateMovement();
+    }
+
     draw.render(blocks);
+
+    //debug zoom
+    camera.showArea();
 
 }
 

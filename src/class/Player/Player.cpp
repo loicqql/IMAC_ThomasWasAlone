@@ -51,10 +51,10 @@ void Player::render() {
 
 	glColor3f(color->getR(), color->getG(), color->getB());
 	glBegin(GL_POLYGON);
-		glVertex2d(pos->getX() + hW - deltaCamera->getX(),  pos->getY() + hH - deltaCamera->getY());
-		glVertex2d(pos->getX() + hW - deltaCamera->getX(),  pos->getY() - hH - deltaCamera->getY());
-		glVertex2d(pos->getX() - hW - deltaCamera->getX(),  pos->getY() - hH - deltaCamera->getY());
-		glVertex2d(pos->getX() - hW - deltaCamera->getX(),  pos->getY() + hH - deltaCamera->getY());
+		glVertex2d((pos->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
+		glVertex2d((pos->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+		glVertex2d((pos->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+		glVertex2d((pos->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
 	glEnd();
 
 }
@@ -64,9 +64,9 @@ void Player::drawTriangle() {
 	float hH = 2 / 2;
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
-		glVertex2d(pos->getX() + hW - deltaCamera->getX(), 	pos->getY() + hH - deltaCamera->getY() + (h / 2) + 2);
-		glVertex2d(pos->getX() - deltaCamera->getX(),  pos->getY() - hH - deltaCamera->getY() + (h / 2) + 2);
-		glVertex2d(pos->getX() - hW - deltaCamera->getX(),  pos->getY() + hH - deltaCamera->getY() + (h / 2) + 2);
+		glVertex2d((pos->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() + hH - deltaCamera->getY() + (h / 2) + 2) / deltaCamera->getZ());
+		glVertex2d((pos->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() - hH - deltaCamera->getY() + (h / 2) + 2) / deltaCamera->getZ());
+		glVertex2d((pos->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() + hH - deltaCamera->getY() + (h / 2) + 2) / deltaCamera->getZ());
 	glEnd();
 }
 
