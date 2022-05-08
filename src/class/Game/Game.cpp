@@ -34,6 +34,9 @@ Game::Game() {
         players[i].setDelta(deltaCamera);
     }
 
+    ray.setBlocks(blocks);
+    ray.setDelta(deltaCamera);
+
 }
 
 void Game::movePlayer(Vector * vecInput) {
@@ -75,7 +78,11 @@ void Game::pauseGame() {
     }    
 }
 
-void Game::renderPlay() { 
+void Game::renderPlay() {
+
+    ray.setBlocks(blocks);
+    ray.render();
+
     players[0].render();
     players[1].render();
     players[2].render();

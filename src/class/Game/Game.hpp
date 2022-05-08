@@ -13,6 +13,8 @@
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Draw/Draw.hpp"
 
+#include "../Ray/Ray.hpp"
+
 using namespace std;
 
 class Game {
@@ -37,4 +39,6 @@ class Game {
 		int playerNum;
 		vector <Block*> blocks;
 		int mode;
+
+		Ray ray;
 };

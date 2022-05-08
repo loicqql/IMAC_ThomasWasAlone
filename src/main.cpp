@@ -106,6 +106,9 @@ int main(int argc, char** argv) {
   
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
 
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable( GL_BLEND );
+
     vecInput = new Vector(0.0, 0.0);
   
     /* Boucle principale */

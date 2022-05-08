@@ -57,3 +57,22 @@ char Collision::getCollision(Box * player, vector <Block*> blocks, int playerNum
 	
 	return '#';
 }
+
+bool Collision::rayIntersection(vector <Block*> blocks, Vector * vec) {
+
+    for(int i = 0; i < blocks.size(); ++i) {
+        Block * block = blocks[i];
+        Box * oneBox = block->getBox();
+
+        float hW = oneBox->getW() / 2;
+		float hH = oneBox->getH() / 2;
+        if((vec->getX() > oneBox->getX() - hW) && (vec->getX() < oneBox->getX() + hW)) {
+            if((vec->getY() > oneBox->getY() - hH) && (vec->getY() < oneBox->getY() + hH)) {
+                return true;
+            }
+        }
+        
+    }
+	
+	return false;
+}
