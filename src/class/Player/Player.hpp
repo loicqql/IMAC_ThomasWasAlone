@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include <iostream>
+
 #include "../Block/Block.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Color/Color.hpp"

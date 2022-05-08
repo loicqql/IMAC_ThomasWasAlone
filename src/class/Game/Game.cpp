@@ -3,6 +3,7 @@
 using namespace std;
 
 Game::Game() {
+    mode = PLAY;
     deltaCamera = camera.getDelta();
     playerNum = 0;
     for (int i = 0; i < 4; i++) {
@@ -36,18 +37,45 @@ Game::Game() {
 }
 
 void Game::movePlayer(Vector * vecInput) {
-    for (int i = 0; i < 4; i++) {
-        players[i].setBlocks(blocks);
-        if(i != playerNum) {
-            players[i].move(new Vector(0.0, 0.0));
+    if(mode == PLAY) {
+        for (int i = 0; i < 4; i++) {
+            players[i].setBlocks(blocks);
+            if(i != playerNum) {
+                players[i].move(new Vector(0.0, 0.0));
+            }
         }
+        players[playerNum].move(vecInput);
+        Vector * vec = players[playerNum].getPos();
+        deltaCamera = camera.playerMove(vec);
     }
-    players[playerNum].move(vecInput);
-    Vector * vec = players[playerNum].getPos();
-    deltaCamera = camera.playerMove(vec);
 }
 
-void Game::render() {
+void Game::handleClick(Vector * vecClick) {
+    if(mode == START || mode == PAUSE) {
+        if(gui.testAreas(vecClick)) {
+            switch (mode) {
+                case START:
+                    mode = PAUSE;
+                    gui.setUpAreasPause();
+                    break;
+                case PAUSE:
+                    mode = PLAY;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }    
+}
+
+void Game::pauseGame() {
+    if(mode == PLAY) {
+        gui.setUpAreasPause();
+        mode = PAUSE;
+    }    
+}
+
+void Game::renderPlay() { 
     players[0].render();
     players[1].render();
     players[2].render();
@@ -65,6 +93,41 @@ void Game::render() {
     //debug zoom
     camera.showArea();
 
+}
+
+void Game::renderStart() {
+
+    gui.showStart();
+
+    //debug menu
+    gui.showArea();
+
+}
+
+void Game::renderPause() {
+
+    
+    gui.showStart();
+
+    //debug menu
+    gui.showArea();
+
+}
+
+void Game::render() {
+    switch (mode) {
+        case START:
+            renderStart();
+            break;
+        case PAUSE:
+            renderPause();
+            break;
+        case PLAY:
+            renderPlay();
+            break;
+        default:
+            break;
+    }
 }
 
 void Game::switchPlayer() {

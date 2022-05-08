@@ -137,10 +137,10 @@ int main(int argc, char** argv) {
 				break;
 			}
 		
-			if(	e.type == SDL_KEYDOWN && (e.key.keysym.sym == SDLK_ESCAPE)) {
-				loop = 0; 
-				break;
-			}
+			// if(	e.type == SDL_KEYDOWN && (e.key.keysym.sym == SDLK_ESCAPE)) {
+			// 	loop = 0; 
+			// 	break;
+			// }
             
             switch(e.type) {
                 case SDL_WINDOWEVENT:
@@ -157,13 +157,16 @@ int main(int argc, char** argv) {
 
                 /* Clic souris */
                 case SDL_MOUSEBUTTONUP:
-                    //vecInput = new Vector(0.0, 10.0);
+                    game.handleClick(new Vector(((-1 + 2. * e.button.x / (float) WINDOW_WIDTH) * (GL_VIEW_SIZE / 2)), (-(-1 + 2. * e.button.y / (float) WINDOW_HEIGHT) * (GL_VIEW_SIZE / 2))));
                     break;
                 
                 /* Touche clavier */
                 case SDL_KEYDOWN:
-                    if(e.key.keysym.sym == 9) {
+                    if(e.key.keysym.sym == 9) { //tab
                         game.switchPlayer();
+                    }
+                    if(e.key.keysym.sym == 27) { //echap
+                        game.pauseGame();
                     }
                     break;
                     
