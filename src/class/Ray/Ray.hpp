@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include <vector>
+#include <algorithm>
 #include <iostream>
 
 #include "../Block/Block.hpp"
@@ -26,4 +27,5 @@ class Ray {
         Vector * vec;
         Vector * deltaCamera;
 
+        int k;
 };

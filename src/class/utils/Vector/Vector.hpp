@@ -9,15 +9,21 @@ class Vector {
         
         float getX();
         float getY();
+
         float getZ();
+        float getAngle();
 
         void setZ(float nb);
+        void setAngle(float nb);
 
         void add(Vector vec);
         void subtract(Vector vec); 
+
+        
 		
 	private:
         float x;
         float y;
         float z;
+        float angle;
 };

@@ -66,8 +66,8 @@ bool Collision::rayIntersection(vector <Block*> blocks, Vector * vec) {
 
         float hW = oneBox->getW() / 2;
 		float hH = oneBox->getH() / 2;
-        if((vec->getX() > oneBox->getX() - hW) && (vec->getX() < oneBox->getX() + hW)) {
-            if((vec->getY() > oneBox->getY() - hH) && (vec->getY() < oneBox->getY() + hH)) {
+        if((vec->getX() >= oneBox->getX() - hW) && (vec->getX() <= oneBox->getX() + hW)) {
+            if((vec->getY() >= oneBox->getY() - hH) && (vec->getY() <= oneBox->getY() + hH)) {
                 return true;
             }
         }

@@ -28,6 +28,15 @@ Game::Game() {
     aBlock->setSteps(1000.0);
     blocks.push_back(aBlock);
 
+    Box * box3 = new Box(500.0, 5.0, (0.0) - deltaCamera->getX(), (60.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box3));
+
+    Box * box4 = new Box(5.0, 140.0, (-100) - deltaCamera->getX(), (0) - deltaCamera->getY());
+    blocks.push_back(new Block(box4));
+
+    Box * box5 = new Box(5.0, 140.0, (100) - deltaCamera->getX(), (0) - deltaCamera->getY());
+    blocks.push_back(new Block(box5));
+
     //set Delta to everyone
     draw.setDelta(deltaCamera);
     for (int i = 0; i < 4; i++) {

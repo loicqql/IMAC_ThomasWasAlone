@@ -20,8 +20,16 @@ float Vector::getZ() {
     return z;
 }
 
+float Vector::getAngle() {
+    return angle;
+}
+
 void Vector::setZ(float nb) {
     z = nb;
+}
+
+void Vector::setAngle(float nb) {
+    angle = nb;
 }
 
 void Vector::add(Vector vec) {
