@@ -13,7 +13,7 @@ bool sortVectorCCW(Vector * v1, Vector * v2) {
 }
 
 bool sortVector(Vector * v1, Vector * v2) {
-    if(v1->getAngle() > v2->getAngle()) {
+    if(v1->getAngle() < v2->getAngle()) {
         return true;
     }
     return false;
@@ -55,10 +55,10 @@ void Ray::render() {
         W = oneBox->getW() / 2;
         H = oneBox->getH() / 2;
 
-        // corners.push_back(new Vector(oneBox->getX() + W, oneBox->getY() + H));
-        // corners.push_back(new Vector(oneBox->getX() + W, oneBox->getY() - H));
-        // corners.push_back(new Vector(oneBox->getX() - W, oneBox->getY() + H));
-        // corners.push_back(new Vector(oneBox->getX() - W, oneBox->getY() - H));
+        corners.push_back(new Vector(oneBox->getX() + W, oneBox->getY() + H));
+        corners.push_back(new Vector(oneBox->getX() + W, oneBox->getY() - H));
+        corners.push_back(new Vector(oneBox->getX() - W, oneBox->getY() + H));
+        corners.push_back(new Vector(oneBox->getX() - W, oneBox->getY() - H));
     }
 
     //TEST DRAW
@@ -97,33 +97,63 @@ void Ray::render() {
 
     
 
-    glColor4f(44.0 / 255.0, 55.0 / 255.0, 101.0 / 255.0, 0.5);
+    glColor4f(44.0 / 255.0, 55.0 / 255.0, 101.0 / 255.0, 1.0);
     glBegin(GL_POLYGON);
     // glBegin(GL_LINES);
-    // glVertex2d((-100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
-    // glVertex2d((100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
+    //glVertex2d((-100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
+    //glVertex2d((100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
 
     cout << "-1-" << endl;
 
     for(int i = 0; i < intersects.size(); ++i) {
         Vector * intersect = intersects[i];
 
-            cout << intersect->getX() << endl;
         
-            // glVertex2d((vec->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - deltaCamera->getY()) / deltaCamera->getZ());
+            //glVertex2d((vec->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - deltaCamera->getY()) / deltaCamera->getZ());
             glVertex2d((intersect->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (intersect->getY() - deltaCamera->getY()) / deltaCamera->getZ());
         
     }
     
     glEnd();
 
-//    test(intersects[k]);
+ 
 
-//    k++;
 
-//    if(k >= intersects.size()) {
-//        k=0;
-//    }
+    
+    //glBegin(GL_POLYGON);
+    
+    //glVertex2d((-100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
+    //glVertex2d((100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
+
+    cout << "-1-" << endl;
+
+    for(int i = 0; i < intersects.size(); ++i) {
+        Vector * intersect = intersects[i];
+
+            if(k == i) {
+                glColor3f(1.0, 1.0, 1.0);
+
+            }else {
+                glColor3f(1.0, 0.0, 0.0);
+            }
+
+            glBegin(GL_LINES);
+            
+
+            cout << intersect->getX() << endl;
+        
+            glVertex2d((vec->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - deltaCamera->getY()) / deltaCamera->getZ());
+            glVertex2d((intersect->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (intersect->getY() - deltaCamera->getY()) / deltaCamera->getZ());
+
+            glEnd();
+        
+    }
+
+    k++;
+    
+    if(k >= intersects.size()) {
+        k=0;
+    }
 
 }
 
