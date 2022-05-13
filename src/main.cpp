@@ -14,8 +14,8 @@ Game game;
 Vector * vecInput;
 
 /* Dimensions initiales et titre de la fenetre */
-static const unsigned int WINDOW_WIDTH = 800;
-static const unsigned int WINDOW_HEIGHT = 600;
+static const unsigned int WINDOW_WIDTH = 1300;
+static const unsigned int WINDOW_HEIGHT = 800;
 static const char WINDOW_TITLE[] = "Game";
 
 /* Espace fenetre virtuelle */

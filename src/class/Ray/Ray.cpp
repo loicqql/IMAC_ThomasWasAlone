@@ -112,10 +112,12 @@ void Ray::render() {
     
 
     glColor4f(44.0 / 255.0, 55.0 / 255.0, 101.0 / 255.0, 0.6);
-    glBegin(GL_POLYGON);
+    glBegin(GL_TRIANGLE_FAN);
     // glBegin(GL_LINES);
     //glVertex2d((-100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
     //glVertex2d((100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
+
+    glVertex2d((vec->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - deltaCamera->getY()) / deltaCamera->getZ());
 
     for(int i = 0; i < intersects.size(); ++i) {
         Vector * intersect = intersects[i];
@@ -125,6 +127,8 @@ void Ray::render() {
             glVertex2d((intersect->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (intersect->getY() - deltaCamera->getY()) / deltaCamera->getZ());
         
     }
+
+    glVertex2d((intersects[0]->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (intersects[0]->getY() - deltaCamera->getY()) / deltaCamera->getZ());
     
     glEnd();
 
@@ -132,6 +136,8 @@ void Ray::render() {
     
     //glVertex2d((-100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
     //glVertex2d((100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
+
+    /*
 
     cout << "-1-" << endl;
 
@@ -163,6 +169,8 @@ void Ray::render() {
     if(k >= intersects.size()) {
         k=0;
     }
+
+    */
 
 
 

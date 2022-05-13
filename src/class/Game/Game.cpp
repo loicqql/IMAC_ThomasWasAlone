@@ -89,6 +89,9 @@ void Game::pauseGame() {
 
 void Game::renderPlay() {
 
+    ray.setBlocks(blocks);
+    ray.render();
+
     players[0].render();
     players[1].render();
     players[2].render();
@@ -105,9 +108,6 @@ void Game::renderPlay() {
 
     //debug zoom
     camera.showArea();
-
-    ray.setBlocks(blocks);
-    ray.render();
 
 }
 
