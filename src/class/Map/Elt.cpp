@@ -110,7 +110,18 @@ void Elt::insert(Block block){
         }
     }else{//is not leaf
 
-
+        if(block.getBox()->isIn(childA->origin->getX(), childA->origin->getY(), childA->getWidth(), childA->getHeight())){
+            childA->insert(block);
+        }
+        if(block.getBox()->isIn(childB->origin->getX(), childB->origin->getY(), childB->getWidth(), childB->getHeight())){
+            childB->insert(block);
+        }
+        if(block.getBox()->isIn(childC->origin->getX(), childC->origin->getY(), childC->getWidth(), childC->getHeight())){
+            childC->insert(block);
+        }
+        if(block.getBox()->isIn(childD->origin->getX(), childD->origin->getY(), childD->getWidth(), childD->getHeight())){
+            childD->insert(block);
+        }
 
     }
 }

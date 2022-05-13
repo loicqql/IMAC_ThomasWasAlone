@@ -16,6 +16,7 @@ class Map {
         float getWidth();
         float getHeight();
 		void buildMap(vector<Block>);
+		Elt * getLeaves(Elt);
 		
 	private:
 

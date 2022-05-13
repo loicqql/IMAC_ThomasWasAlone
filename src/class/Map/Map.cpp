@@ -24,3 +24,9 @@ void Map::buildMap(vector<Block> b){
     }
 
 }
+
+Elt * Map::getLeaves(Elt root){
+    Elt node = root;
+    //REPRENDRE LA
+
+}
