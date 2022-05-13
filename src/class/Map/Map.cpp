@@ -2,59 +2,25 @@
 
 using namespace std;
 
-Map::Map(float ua, float ub, float uc, float ud) {
-    a = ua;
-    b = ub;
-    c = uc;
-    d = ud;
+Map::Map(float width, float height, Elt * root){
+    w = width;
+    h = height;
 
-    childA = nullptr;
-    childB = nullptr;
-    childC = nullptr;
-    childD = nullptr;
-
-    elts = nullptr;
+    r = root;
 }
 
-float Map::getA(){
-    return a;
+float Map::getHeight(){
+    return h;
 }
 
-float Map::getB(){
-    return b;
+float Map::getWidth(){
+    return w;
 }
 
-float Map::getC(){
-    return c;
-}
+void Map::buildMap(vector<Block> b){
 
-float Map::getD(){
-    return d;
-}
-
-Map Map::getChildA(){
-    return *childA;
-}
-
-Map Map::getChildB(){
-    return *childB;
-}
-
-Map Map::getChildC(){
-    return *childC;
-}
-
-Map Map::getChildD(){
-    return *childD;
-}
-
-bool Map::isLeaf(){
-    if(childA == nullptr && childB == nullptr && childC == nullptr && childD == nullptr){
-        return true;
+    for(Block i : b){
+        r->insert(i);
     }
-    return false;
-}
 
-Elt Map::getElts(){
-    return *elts;
 }

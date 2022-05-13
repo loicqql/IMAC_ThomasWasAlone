@@ -1,19 +1,42 @@
+#include "../utils/Box/Box.hpp"
+#include "../Block/Block.hpp"
+#include "../utils/Vector/Vector.hpp"
+
 #pragma once
 
 using namespace std;
 
 class Elt {
 	public:
-		Elt(float x, float y, float w, float h);
+		Elt(float x, float y, float width, float height);
 
-		float getX();
-		float getY();
-		float getW();
-		float getH();
+		Vector * getOrigin();
+		float getOriginX();
+		float getOriginY();
+		float getWidth();
+		float getHeight();
+		int getNbBlocks();
+
+		Elt getChildA();
+		Elt getChildB();
+		Elt getChildC();
+		Elt getChildD();
+
+		bool isLeaf();
+		Block getBlocks();
+		void insert(Block);
 		
 	private:
-		float x;
-		float y;
+
+		Vector *origin;
 		float w;
 		float h;
+
+		Elt *childA;
+		Elt *childB;
+		Elt *childC;
+		Elt *childD;
+
+		int nbBlocks;
+		Block * blocks; //list of 2D elements composing the map, max 4 elements 
 };
