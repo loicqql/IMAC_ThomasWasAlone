@@ -8,8 +8,8 @@ void Draw::setDelta(Vector * delta) {
 	deltaCamera = delta;
 }
 
-void Draw::render(vector <Block*> blocks) {
-    for(int i = 4; i < blocks.size(); ++i) {
+void Draw::render(vector <Block*> blocks, int nbPlayers) {
+    for(int i = nbPlayers; i < blocks.size(); ++i) {
         Block * block = blocks[i];
         Box * oneBox = block->getBox();
 

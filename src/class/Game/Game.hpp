@@ -1,5 +1,6 @@
 #pragma once
 
+#define INTRO 3
 #define PLAY 2
 #define PAUSE 1
 #define START 0
@@ -12,6 +13,7 @@
 #include "../Gui/Gui.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Draw/Draw.hpp"
+#include "../utils/Text/Text.hpp"
 
 #include "../Ray/Ray.hpp"
 
@@ -24,9 +26,12 @@ class Game {
 		void movePlayer(Vector * vecInput);
 		void handleClick(Vector * vecClick);
 		void render();
+		void loadPlay();
+		void loadIntro();
 		void renderPlay();
 		void renderPause();
 		void renderStart();
+		void renderIntro();
 		void switchPlayer();
 		void pauseGame();
 		
@@ -35,8 +40,10 @@ class Game {
 		Camera camera;
 		Gui gui;
 		Draw draw;
+		Text text;
 		Vector * deltaCamera;
 		int playerNum;
+		int nbPlayers;
 		vector <Block*> blocks;
 		int mode;
 

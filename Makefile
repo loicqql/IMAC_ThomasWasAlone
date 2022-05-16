@@ -1,9 +1,9 @@
 CC=g++
 CFLAGS= -Wall -O2 -g
 CFLAGSDEBUG=-DDEBUG -g
-LDFLAGS	= -lSDL2 -lGLU -lGL -lm
+LDFLAGS	= -lSDL2 -lSDL2_image -lGLU -lGL -lm
 
-game: build/main.o build/game.o build/block.o build/map.o build/player.o build/ray.o build/camera.o build/gui.o build/vector.o build/color.o build/box.o build/draw.o build/collision.o build/area.o
+game: build/main.o build/game.o build/block.o build/map.o build/player.o build/ray.o build/camera.o build/gui.o build/vector.o build/color.o build/box.o build/draw.o build/collision.o build/area.o build/text.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 build/main.o: src/main.cpp
@@ -46,6 +46,9 @@ build/collision.o: src/class/utils/Collision/Collision.cpp src/class/utils/Colli
 	$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
 
 build/area.o: src/class/utils/Area/Area.cpp src/class/utils/Area/Area.hpp
+	$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
+
+build/text.o: src/class/utils/Text/Text.cpp src/class/utils/Text/Text.hpp
 	$(CC) $(CFLAGS) -o $@ -c $< $(LDFLAGS)
 
 clean: 

@@ -14,7 +14,7 @@ class Draw {
 		Draw();
 
 		void setDelta(Vector * delta);
-		void render(vector <Block*> blocks);
+		void render(vector <Block*> blocks, int nbPlayers);
 		void render(Block * block);      
 
 	private:

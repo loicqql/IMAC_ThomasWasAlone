@@ -6,12 +6,6 @@ Ray::Ray() {
     k=0;
 }
 
-bool sortVectorCCW(Vector * v1, Vector * v2) {
-    float av1 = atan2f(v1->getY() - 0.0, v1->getX() - 50.0);
-    float av2 = atan2f(v2->getY() - 0.0, v2->getX() - 50.0);
-    return av1 < av2;
-}
-
 bool sortVector(Vector * v1, Vector * v2) {
     if(v1->getAngle() < v2->getAngle()) {
         return true;
