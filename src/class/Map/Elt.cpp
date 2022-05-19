@@ -62,13 +62,9 @@ bool Elt::isLeaf(){
     return false;
 }
 
-Block Elt::getBlocks(){
-    return *blocks;
+Block * Elt::getBlocks(){
+    return blocks;
 }
-
-// vector <Block*> Elt::getNeighbours(){
-
-// }
 
 void Elt::insert(Block block){
     if(isLeaf()){//is leaf

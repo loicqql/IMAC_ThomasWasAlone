@@ -2,6 +2,8 @@
 #include "../Block/Block.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "Elt.hpp"
+#include "../utils/Draw/Draw.hpp"
+
 #include <iostream>
 #include <vector>
 
@@ -15,9 +17,10 @@ class Map {
 
         float getWidth();
         float getHeight();
+		Elt * getRoot();
 		void buildMap(vector<Block>);
 		vector<Elt> getLeaves(Elt);
-		void draw();
+		void drawMap();
 		
 	private:
 
@@ -25,4 +28,6 @@ class Map {
 		float h;
 
         Elt * r;
+
+		Draw draw;
 };

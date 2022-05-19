@@ -23,7 +23,7 @@ class Elt {
 		Elt getChildD();
 
 		bool isLeaf();
-		Block getBlocks();
+		Block * getBlocks();
 		void insert(Block);
 		
 	private:

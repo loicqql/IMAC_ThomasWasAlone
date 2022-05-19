@@ -17,6 +17,10 @@ float Map::getWidth(){
     return w;
 }
 
+Elt * Map::getRoot(){
+    return r;
+}
+
 void Map::buildMap(vector<Block> b){
 
     for(Block i : b){
@@ -40,17 +44,12 @@ vector<Elt> Map::getLeaves(Elt node){
     return leaves;
 }
 
-void Map::draw(){
-    vector<Elt> leaves = getLeaves();
-    glBegin(GL_POLYGON);
-    glLoadIdentity();
-    foreach($leaves as $element){
-        glColor3f(0.5);
-        //ajouter conversion des coords
-        glVertex2f($element.getOrigin()->getX());
-        glVertex2f($element.getOrigin()->getY());
-        glVertex2f($element.getWidth());
-        glVertex2f($element.getHeight());
+void Map::drawMap(){
+    vector<Elt> leaves = getLeaves(*r);
+
+    for(uint i = 0 ; i < leaves.size() ; i++){
+        for(int j = 0 ; j < leaves[i].getNbBlocks() ; j++){
+            draw.render(&(leaves[i].getBlocks()[j]));
+        }
     }
-    glEnd();
 }
