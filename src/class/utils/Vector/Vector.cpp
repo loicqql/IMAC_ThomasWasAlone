@@ -33,3 +33,10 @@ void Vector::subtract(Vector vec) {
     x -= vec.getX();
     y -= vec.getY();
 }
+
+bool Vector::isIn(float areaX, float areaY, float w, float h){
+    if(x >= areaX && x <= areaX + w && y >= areaY && y <= areaY+h){
+        return true;
+    }
+    return false;    
+}

@@ -2,6 +2,8 @@
 #include "../Block/Block.hpp"
 #include "../utils/Vector/Vector.hpp"
 
+#include <vector>
+
 #pragma once
 
 using namespace std;
@@ -25,6 +27,8 @@ class Elt {
 		bool isLeaf();
 		Block * getBlocks();
 		void insert(Block);
+
+		vector<Block*> search(Vector);
 		
 	private:
 

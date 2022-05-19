@@ -44,6 +44,41 @@ vector<Elt> Map::getLeaves(Elt node){
     return leaves;
 }
 
+vector<Block*> Map::search(Vector pos){
+    return r->search(pos);
+}
+
+// vector<Block*> Map::search(Elt node, Vector pos){
+
+//     vector<Block*> blocks;
+
+//     if(pos.getX() <= w && pos.getY() <= h){//is in map
+//         if(node.isLeaf()){
+//             for(int i = 0 ; i < node.getNbBlocks() ; i++){
+//                 blocks.push_back(node.getBlocks()[i]);
+//             }
+//         }else{
+//             if(pos.isIn(node.getchildA()->getX(), childA.getY(), childA.getWidth(), childA.getHeight())){
+//                 childA.search(pos);
+//             }
+//             if(pos.isIn(node.getchildB()->getX(), childB.getY(), childB.getWidth(), childB.getHeight())){
+//                 childB.search(pos);
+//             }
+//             if(pos.isIn(node.getchildB()->getX(), childC.getY(), childC.getWidth(), childC.getHeight())){
+//                 childC.search(pos);
+//             }
+//             if(pos.isIn(childD.getX(), childD.getY(), childD.getWidth(), childD.getHeight())){
+//                 childD.search(pos);
+//             }
+//         }
+//     }else{//not in map
+//         return nullptr;
+//     }
+
+
+//     return blocks;
+// }
+
 void Map::drawMap(){
     vector<Elt> leaves = getLeaves(*r);
 

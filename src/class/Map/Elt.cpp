@@ -121,3 +121,29 @@ void Elt::insert(Block block){
 
     }
 }
+
+vector<Block*> Elt::search(Vector pos){
+    vector<Block*> blocks;
+
+    if(isLeaf()){//is leaf
+        for(int i = 0 ; i < getNbBlocks() ; i++){
+            blocks.push_back(&(getBlocks()[i]));
+        }
+    }else{//not leaf
+        if(pos.isIn(childA->getOriginX(), childA->getOriginY(), childA->getWidth(), childA->getHeight())){
+            blocks.insert(blocks.end(), childA->search(pos).begin(), childA->search(pos).end());
+            
+        }
+        if(pos.isIn(childB->getOriginX(), childB->getOriginY(), childB->getWidth(), childB->getHeight())){
+            blocks.insert(blocks.end(), childB->search(pos).begin(), childB->search(pos).end());
+        }
+        if(pos.isIn(childC->getOriginX(), childC->getOriginY(), childC->getWidth(), childC->getHeight())){
+            blocks.insert(blocks.end(), childC->search(pos).begin(), childC->search(pos).end());
+        }
+        if(pos.isIn(childD->getOriginX(), childD->getOriginY(), childD->getWidth(), childD->getHeight())){
+            blocks.insert(blocks.end(), childD->search(pos).begin(), childD->search(pos).end());
+        }
+    }
+   
+    return blocks;
+}

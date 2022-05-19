@@ -21,6 +21,8 @@ class Map {
 		void buildMap(vector<Block>);
 		vector<Elt> getLeaves(Elt);
 		void drawMap();
+
+		vector<Block*> search(Vector);
 		
 	private:
 
