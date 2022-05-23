@@ -26,9 +26,11 @@ class Elt {
 
 		bool isLeaf();
 		Block * getBlocks();
-		void insert(Block);
+		void insertTree(Block*);
 
 		vector<Block*> search(Vector);
+
+		vector<Elt *> getAllElt(vector<Elt *> elts, Elt * node);
 		
 	private:
 

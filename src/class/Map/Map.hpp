@@ -18,11 +18,15 @@ class Map {
         float getWidth();
         float getHeight();
 		Elt * getRoot();
-		void buildMap(vector<Block>);
-		vector<Elt *> getLeaves(Elt*);
-		void drawMap();
+		void buildMap(vector<Block*>);
+		vector<Elt *> getLeaves(Elt * node);
+		vector<Elt *> getLeaves(vector<Elt *> leaves, Elt * node);
+		//vector<Block*> * getLeaves(vector<Block*> * bLeaves, Elt * node);
+		void drawMap(vector<Elt *> leaves);
 
 		vector<Block*> search(Vector);
+
+		vector<Elt *> allElt();
 		
 	private:
 

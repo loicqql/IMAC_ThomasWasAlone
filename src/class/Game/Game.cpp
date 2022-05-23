@@ -33,14 +33,14 @@ Game::Game() {
     blocks.push_back(aBlock);
     */
 
-    Block a = Block(new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY()));
-    Block b = Block(new Box(30.0, 5.0, (-50.0) - deltaCamera->getX(), (-45.0) - deltaCamera->getY()));
-    Block c = Block(new Box(15, 20.0, (50.0) - deltaCamera->getX(), (15.0) - deltaCamera->getY()));
-    Block d = Block(new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY()));
-    Block e = Block(new Box(130.0, 45.0, (-20.0) - deltaCamera->getX(), (-15.0) - deltaCamera->getY()));
+    Block * a = new Block(new Box(10.0, 10.0, (0.0) - deltaCamera->getX(), (10.0) - deltaCamera->getY()));
+    Block * b = new Block(new Box(10.0, 10.0, (1100.0) - deltaCamera->getX(), (800.0) - deltaCamera->getY()));
+    Block * c = new Block(new Box(10, 10.0, (1100.0) - deltaCamera->getX(), (10.0) - deltaCamera->getY()));
+    Block * d = new Block(new Box(10.0, 10.0, (30.0) - deltaCamera->getX(), (800.0) - deltaCamera->getY()));
+    Block * e = new Block(new Box(10.0, 10.0, (50.0) - deltaCamera->getX(), (10.0) - deltaCamera->getY()));
     //Block f = Block(new Box(75, 60.0, (30.0) - deltaCamera->getX(), (45.0) - deltaCamera->getY()));
     
-    vector<Block> allBlocks;
+    vector<Block*> allBlocks;
     allBlocks.push_back(a);
     allBlocks.push_back(b);
     allBlocks.push_back(c);
@@ -84,7 +84,9 @@ void Game::render() {
         block->updateMovement();
     }
 
-    //draw.render(blocks);
+    //vector<Block *> bLeaves = map->getLeaves(map->getRoot());
+
+    draw.render(blocks);
     //map->drawMap();
 
     //debug zoom

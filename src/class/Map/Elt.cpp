@@ -61,7 +61,10 @@ Elt * Elt::getChildD(){
 }
 
 bool Elt::isLeaf(){
-    if (childA == nullptr && childB == nullptr && childC == nullptr && childD == nullptr){
+    // if (childA == nullptr && childB == nullptr && childC == nullptr && childD == nullptr){
+    //     return true;
+    // }
+    if (childA == 0x0 && childB == 0x0 && childC == 0x0 && childD == 0x0){
         return true;
     }
     return false;
@@ -71,7 +74,7 @@ Block * Elt::getBlocks(){
     return *blocks;
 }
 
-void Elt::insert(Block block){
+void Elt::insertTree(Block * block){
 
     cout << "nb blocks debut : " << nbBlocks << endl;
     
@@ -79,7 +82,7 @@ void Elt::insert(Block block){
     
         if(nbBlocks >= 4 ){//leaf is full
 
-            cout << "leaf full -- debut" << endl;
+            cout << "leaf full -- debut" << endl << "------------CREER DES ENFANTS"<<endl;
 
             float w = getWidth()/2;
             float h = getHeight()/2;
@@ -94,13 +97,14 @@ void Elt::insert(Block block){
             childB = new Elt(BDx, ABy, w-1, h);
             childC = new Elt(ACx, CDy, w, h-1);
             childD = new Elt(BDx, CDy, w-1, h-1);
+
             
             //insert again block
-            insert(block);
+            insertTree(block);
 
             //move blocks that can't be in this node as it's not a leaf anymore
             for(int i = 0 ; i < nbBlocks ; i++){
-                insert(*blocks[i]);
+                insertTree(blocks[i]);
                 blocks[i] = nullptr;
             }
             nbBlocks = 0;
@@ -111,8 +115,8 @@ void Elt::insert(Block block){
 
             cout << "leaf not full -- debut" << endl;
 
-            if(block.getBox()->isIn(origin->getX(), origin->getY(), w, h)){
-                blocks[nbBlocks] = &block;
+            if(block->getBox()->isIn(origin->getX(), origin->getY(), w, h)){
+                blocks[nbBlocks] = block;
                 nbBlocks++;
                 cout << nbBlocks << endl;
             }
@@ -123,21 +127,23 @@ void Elt::insert(Block block){
 
         cout << "is not leaf -- debut" << endl;
 
-        if(block.getBox()->isIn(childA->origin->getX(), childA->origin->getY(), childA->getWidth(), childA->getHeight())){
+        cout << "isinB ? "<< block->getBox()->isIn(childB->origin->getX(), childB->origin->getY(), childB->getWidth(), childB->getHeight()) << endl;
+
+        if(block->getBox()->isIn(childA->origin->getX(), childA->origin->getY(), childA->getWidth(), childA->getHeight())){
             cout << "isinA" << endl;
-            childA->insert(block);
+            childA->insertTree(block);
         }
-        if(block.getBox()->isIn(childB->origin->getX(), childB->origin->getY(), childB->getWidth(), childB->getHeight())){
+        if(block->getBox()->isIn(childB->origin->getX(), childB->origin->getY(), childB->getWidth(), childB->getHeight())){
             cout << "isinB" << endl;
-            childB->insert(block);
+            childB->insertTree(block);
         }
-        if(block.getBox()->isIn(childC->origin->getX(), childC->origin->getY(), childC->getWidth(), childC->getHeight())){
+        if(block->getBox()->isIn(childC->origin->getX(), childC->origin->getY(), childC->getWidth(), childC->getHeight())){
             cout << "isinC" << endl;
-            childC->insert(block);
+            childC->insertTree(block);
         }
-        if(block.getBox()->isIn(childD->origin->getX(), childD->origin->getY(), childD->getWidth(), childD->getHeight())){
+        if(block->getBox()->isIn(childD->origin->getX(), childD->origin->getY(), childD->getWidth(), childD->getHeight())){
             cout << "isinD" << endl;
-            childD->insert(block);
+            childD->insertTree(block);
         }
 
         cout << "is not leaf -- fin" << endl;
@@ -169,4 +175,16 @@ vector<Block*> Elt::search(Vector pos){
     }
    
     return blocks;
+}
+
+vector<Elt *> Elt::getAllElt(vector<Elt *> elts, Elt * node){
+    if(isLeaf()){
+        elts.push_back(this);
+    }else if(!isLeaf()){
+        getAllElt(elts, childA);
+        getAllElt(elts, childB);
+        getAllElt(elts, childC);
+        getAllElt(elts, childC);
+    }
+    return elts;
 }
