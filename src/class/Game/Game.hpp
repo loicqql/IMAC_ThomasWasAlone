@@ -7,6 +7,7 @@
 #include "../Camera/Camera.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Draw/Draw.hpp"
+#include "../Map/Map.hpp"
 
 using namespace std;
 
@@ -25,5 +26,6 @@ class Game {
 		Vector * deltaCamera;
 		int playerNum;
 		vector <Block*> blocks;
+		Map *map;
 
 };

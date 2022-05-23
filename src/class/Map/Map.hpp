@@ -13,7 +13,7 @@ using namespace std;
 
 class Map {
 	public:
-		Map(float width, float height, Elt * root);
+		Map(float width, float height);
 
         float getWidth();
         float getHeight();

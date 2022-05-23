@@ -1,5 +1,9 @@
 #include "Game.hpp"
 
+#include "../Map/Map.hpp"
+
+#include <iostream>
+
 using namespace std;
 
 Game::Game() {
@@ -17,6 +21,7 @@ Game::Game() {
     players[3].setColor(new Color(0.5, 0.5, 0.5));
 
     //TEMP get from map
+    /*
     Box * box1 = new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
     blocks.push_back(new Block(box1));
 	Box * box2 = new Box(30.0, 5.0, (-50.0) - deltaCamera->getX(), (-45.0) - deltaCamera->getY());
@@ -26,6 +31,25 @@ Game::Game() {
     aBlock->setPosB(new Vector(50.0, 20.0));
     aBlock->setSteps(1000.0);
     blocks.push_back(aBlock);
+    */
+
+    Block a = Block(new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY()));
+    Block b = Block(new Box(30.0, 5.0, (-50.0) - deltaCamera->getX(), (-45.0) - deltaCamera->getY()));
+    Block c = Block(new Box(15, 20.0, (50.0) - deltaCamera->getX(), (15.0) - deltaCamera->getY()));
+    Block d = Block(new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY()));
+    Block e = Block(new Box(130.0, 45.0, (-20.0) - deltaCamera->getX(), (-15.0) - deltaCamera->getY()));
+    Block f = Block(new Box(75, 60.0, (30.0) - deltaCamera->getX(), (45.0) - deltaCamera->getY()));
+    
+    vector<Block> allBlocks;
+    allBlocks.push_back(a);
+    allBlocks.push_back(b);
+    allBlocks.push_back(c);
+    allBlocks.push_back(d);
+    allBlocks.push_back(e);
+    //allBlocks.push_back(f);
+
+    Map *map = new Map(1920, 1080);
+    map->buildMap(allBlocks);
 
     //set Delta to everyone
     draw.setDelta(deltaCamera);
@@ -55,12 +79,13 @@ void Game::render() {
 
     players[playerNum].drawTriangle();
 
-    for(int i = 4; i < blocks.size(); ++i) {
+    for(uint i = 4; i < blocks.size(); ++i) {
         Block * block = blocks[i];
         block->updateMovement();
     }
 
-    draw.render(blocks);
+    //draw.render(blocks);
+    //map->drawMap();
 
     //debug zoom
     camera.showArea();

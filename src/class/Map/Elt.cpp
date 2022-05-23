@@ -2,6 +2,8 @@
 
 using namespace std;
 
+#include <iostream>
+
 Elt::Elt(float x, float y, float width, float height) {
     origin = new Vector(x, y);
     childA = nullptr;
@@ -12,7 +14,7 @@ Elt::Elt(float x, float y, float width, float height) {
     w = width;
     h = height;
 
-    blocks = nullptr;
+    blocks[0] = nullptr;
 }
 
 Vector * Elt::getOrigin(){
@@ -63,12 +65,18 @@ bool Elt::isLeaf(){
 }
 
 Block * Elt::getBlocks(){
-    return blocks;
+    return *blocks;
 }
 
 void Elt::insert(Block block){
+
+    cout << "nb blocks debut : " << nbBlocks << endl;
+    
     if(isLeaf()){//is leaf
-        if(nbBlocks >= 4){//leaf is full
+    
+        if(nbBlocks >= 4 ){//leaf is full
+
+            cout << "leaf full -- debut" << endl;
 
             float w = getWidth()/2;
             float h = getHeight()/2;
@@ -78,46 +86,58 @@ void Elt::insert(Block block){
             float CDy = getOriginY() + (getHeight()/2) + 1;
 
             childA = new Elt(ACx, ABy, w, h);
+
+            cout << "nb blocks childA : " << childA->getNbBlocks() << endl;
             childB = new Elt(BDx, ABy, w-1, h);
             childC = new Elt(ACx, CDy, w, h-1);
             childD = new Elt(BDx, CDy, w-1, h-1);
+            
+            //insert again block
+            insert(block);
 
-            if(block.getBox()->isIn(ACx, ABy, w, h)){//isIn(childA) ?
-                childA->blocks[0] = block;
-                childA->nbBlocks++;
+            //move blocks that can't be in this node as it's not a leaf anymore
+            for(int i = 0 ; i < nbBlocks ; i++){
+                insert(*blocks[i]);
+                blocks[i] = nullptr;
             }
-            if(block.getBox()->isIn(BDx, ABy, w-1, h)){//isIn(childB) ?
-                childB->blocks[0] = block;
-            }
-            if(block.getBox()->isIn(ACx, CDy, w, h-1)){//isIn(childC) ?
-                childC->blocks[0] = block;
-            }
-            if(block.getBox()->isIn(BDx, CDy, w-1, h-1)){//isIn(childD) ?
-                childD->blocks[0] = block;
-            }
+            nbBlocks = 0;
+
+            cout << "leaf full -- fin" << endl;
 
         }else{//leaf is not full
 
+            cout << "leaf not full -- debut" << endl;
+
             if(block.getBox()->isIn(origin->getX(), origin->getY(), w, h)){
-                blocks[nbBlocks] = block;
+                blocks[nbBlocks] = &block;
                 nbBlocks++;
+                cout << nbBlocks << endl;
             }
+            cout << "leaf not full -- fin" << endl;
 
         }
     }else{//is not leaf
 
+        cout << "is not leaf -- debut" << endl;
+
         if(block.getBox()->isIn(childA->origin->getX(), childA->origin->getY(), childA->getWidth(), childA->getHeight())){
+            cout << "isinA" << endl;
             childA->insert(block);
         }
         if(block.getBox()->isIn(childB->origin->getX(), childB->origin->getY(), childB->getWidth(), childB->getHeight())){
+            cout << "isinB" << endl;
             childB->insert(block);
         }
         if(block.getBox()->isIn(childC->origin->getX(), childC->origin->getY(), childC->getWidth(), childC->getHeight())){
+            cout << "isinC" << endl;
             childC->insert(block);
         }
         if(block.getBox()->isIn(childD->origin->getX(), childD->origin->getY(), childD->getWidth(), childD->getHeight())){
+            cout << "isinD" << endl;
             childD->insert(block);
         }
+
+        cout << "is not leaf -- fin" << endl;
 
     }
 }

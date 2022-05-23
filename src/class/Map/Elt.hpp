@@ -42,5 +42,5 @@ class Elt {
 		Elt *childD;
 
 		int nbBlocks;
-		Block * blocks; //list of 2D elements composing the map, max 4 elements 
+		Block * blocks[4]; //list of 2D elements composing the map, max 4 elements 
 };

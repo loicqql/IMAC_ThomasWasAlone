@@ -1,12 +1,14 @@
 #include "Map.hpp"
 
+#include <iostream>
+
 using namespace std;
 
-Map::Map(float width, float height, Elt * root){
+Map::Map(float width, float height){
     w = width;
     h = height;
 
-    r = root;
+    r = new Elt(0, 0, w, h);
 }
 
 float Map::getHeight(){
@@ -22,8 +24,8 @@ Elt * Map::getRoot(){
 }
 
 void Map::buildMap(vector<Block> b){
-
     for(Block i : b){
+        //cout << "getX" << i.getBox()->getY() << endl;
         r->insert(i);
     }
 
