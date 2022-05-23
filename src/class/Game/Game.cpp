@@ -38,7 +38,7 @@ Game::Game() {
     Block c = Block(new Box(15, 20.0, (50.0) - deltaCamera->getX(), (15.0) - deltaCamera->getY()));
     Block d = Block(new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY()));
     Block e = Block(new Box(130.0, 45.0, (-20.0) - deltaCamera->getX(), (-15.0) - deltaCamera->getY()));
-    Block f = Block(new Box(75, 60.0, (30.0) - deltaCamera->getX(), (45.0) - deltaCamera->getY()));
+    //Block f = Block(new Box(75, 60.0, (30.0) - deltaCamera->getX(), (45.0) - deltaCamera->getY()));
     
     vector<Block> allBlocks;
     allBlocks.push_back(a);
@@ -48,7 +48,7 @@ Game::Game() {
     allBlocks.push_back(e);
     //allBlocks.push_back(f);
 
-    Map *map = new Map(1920, 1080);
+    map = new Map(1920, 1080);
     map->buildMap(allBlocks);
 
     //set Delta to everyone

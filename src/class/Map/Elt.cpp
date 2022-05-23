@@ -15,6 +15,9 @@ Elt::Elt(float x, float y, float width, float height) {
     h = height;
 
     blocks[0] = nullptr;
+    blocks[1] = nullptr;
+    blocks[2] = nullptr;
+    blocks[3] = nullptr;
 }
 
 Vector * Elt::getOrigin(){
@@ -41,20 +44,20 @@ int Elt::getNbBlocks(){
     return nbBlocks;
 }
 
-Elt Elt::getChildA(){
-    return *childA;
+Elt * Elt::getChildA(){
+    return childA;
 }
 
-Elt Elt::getChildB(){
-    return *childB;
+Elt * Elt::getChildB(){
+    return childB;
 }
 
-Elt Elt::getChildC(){
-    return *childC;
+Elt * Elt::getChildC(){
+    return childC;
 }
 
-Elt Elt::getChildD(){
-    return *childD;
+Elt * Elt::getChildD(){
+    return childD;
 }
 
 bool Elt::isLeaf(){

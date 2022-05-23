@@ -19,7 +19,7 @@ class Map {
         float getHeight();
 		Elt * getRoot();
 		void buildMap(vector<Block>);
-		vector<Elt> getLeaves(Elt);
+		vector<Elt *> getLeaves(Elt*);
 		void drawMap();
 
 		vector<Block*> search(Vector);

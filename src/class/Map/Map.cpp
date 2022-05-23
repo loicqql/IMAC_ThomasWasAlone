@@ -31,16 +31,16 @@ void Map::buildMap(vector<Block> b){
 
 }
 
-vector<Elt> Map::getLeaves(Elt node){
-    vector<Elt> leaves;
-    if(node.isLeaf()){
+vector<Elt *> Map::getLeaves(Elt * node){
+    vector<Elt *> leaves;
+    if(node->isLeaf()){
         leaves.push_back(node);
     }
-    if(!node.isLeaf()){
-        getLeaves(node.getChildA());
-        getLeaves(node.getChildB());
-        getLeaves(node.getChildC());
-        getLeaves(node.getChildD());
+    if(!node->isLeaf()){
+        getLeaves(node->getChildA());
+        getLeaves(node->getChildB());
+        getLeaves(node->getChildC());
+        getLeaves(node->getChildD());
     }
 
     return leaves;
@@ -82,11 +82,14 @@ vector<Block*> Map::search(Vector pos){
 // }
 
 void Map::drawMap(){
-    vector<Elt> leaves = getLeaves(*r);
+    vector<Elt*> leaves = getLeaves(r);
+    cout << "is empty? " << leaves.empty() << endl;
+
+    //draw.render(&(leaves[0].getBlocks()[0]));
 
     for(uint i = 0 ; i < leaves.size() ; i++){
-        for(int j = 0 ; j < leaves[i].getNbBlocks() ; j++){
-            draw.render(&(leaves[i].getBlocks()[j]));
+        for(int j = 0 ; j < leaves[i]->getNbBlocks() ; j++){
+            draw.render(&(leaves[i]->getBlocks()[j]));
         }
     }
 }

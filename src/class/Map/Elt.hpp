@@ -19,10 +19,10 @@ class Elt {
 		float getHeight();
 		int getNbBlocks();
 
-		Elt getChildA();
-		Elt getChildB();
-		Elt getChildC();
-		Elt getChildD();
+		Elt * getChildA();
+		Elt * getChildB();
+		Elt * getChildC();
+		Elt * getChildD();
 
 		bool isLeaf();
 		Block * getBlocks();
