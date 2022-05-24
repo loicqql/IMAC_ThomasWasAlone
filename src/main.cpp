@@ -9,7 +9,12 @@
 
 #include "class/Game/Game.hpp"
 #include "class/utils/Vector/Vector.hpp"
+#include "class/utils/Image/Image.hpp"
 
+#define NB_IMAGES 3
+
+GLuint * textures;
+Image images;
 Game game;
 Vector * vecInput;
 
@@ -46,6 +51,16 @@ void onWindowResized(unsigned int width, unsigned int height) {
     }
 }
 
+void loadImage(GLuint * textures, SDL_Surface * surface, int index) {
+    if(surface) {
+        glBindTexture(GL_TEXTURE_2D, textures[index]);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }else { cout << "oups" << endl;}
+    SDL_FreeSurface(surface);
+}
 
 int main(int argc, char** argv) {
     //* Initialisation de la SDL */
@@ -106,11 +121,23 @@ int main(int argc, char** argv) {
   
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
 
+    vecInput = new Vector(0.0, 0.0);
+
+    game.setImage(&images);
+
+    
+    textures = new GLuint[NB_IMAGES];
+    glGenTextures(NB_IMAGES, textures);
+    images.push(textures);
+
+    loadImage(textures, IMG_Load("images/logo_imac.png"), 0);
+    loadImage(textures, IMG_Load("images/chat.png"), 1);
+    loadImage(textures, IMG_Load("images/d.png"), 2);
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable( GL_BLEND );
 
-    vecInput = new Vector(0.0, 0.0);
-  
+
     /* Boucle principale */
     int loop = 1;
     while(loop) {
@@ -122,9 +149,11 @@ int main(int argc, char** argv) {
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
+        
         /* le vrai main */
         game.movePlayer(vecInput);
         game.render();
+        
 
         vecInput = nullptr;
 
@@ -203,6 +232,10 @@ int main(int argc, char** argv) {
             vecInput = new Vector(0.0, 0.0);
         }
     }
+
+    glDisable(GL_TEXTURE_2D);
+    glDeleteTextures(NB_IMAGES, textures);
+
 
     /* Liberation des ressources associees a la SDL */ 
     SDL_GL_DeleteContext(context);

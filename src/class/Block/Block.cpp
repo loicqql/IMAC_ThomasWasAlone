@@ -24,7 +24,7 @@ void Block::setSteps(float nb) {
 }
 
 void Block::updateMovement() {
-    if(posA != nullptr && posB != nullptr) {
+    if(posA && posB) {
         if((box->getX() >= posA->getX() && box->getX() <= posB->getX()) || (box->getX() <= posA->getX() && box->getX() >= posB->getX())) {
             float dX = (posA->getX() - posB->getX()) / steps;
             float dY = (posA->getY() - posB->getY()) / steps;

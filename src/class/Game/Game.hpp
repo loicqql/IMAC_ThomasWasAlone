@@ -39,6 +39,7 @@ class Game {
 		void switchPlayer();
 		void pauseGame();
 		void handleAction();
+		void setImage(Image * yimages);
 		
 	private:
         Player players[4];
@@ -53,5 +54,5 @@ class Game {
 		vector <Area*> actionAreas;
 
 		Ray ray;
-		Image image;
+		Image * images;
 };

@@ -1,9 +1,12 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "../../../../lib/fakesdlimage.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <vector>
+#include "../Vector/Vector.hpp"
+
+#include <iostream>
 
 using namespace std;
 
@@ -11,11 +14,12 @@ class Image {
 	public:
         Image();
 
-        void render();
-
+        void render(int index);
+		void setDelta(Vector * delta);
+        void push(GLuint * ytextures);
+		GLuint * getTextures();
 		
 	private:
-        bool loaded;
-        SDL_Surface* surface;
-        GLuint texture;
+        GLuint * textures;
+		Vector * deltaCamera;
 };

@@ -7,13 +7,6 @@ Map::Map(float ua, float ub, float uc, float ud) {
     b = ub;
     c = uc;
     d = ud;
-
-    childA = nullptr;
-    childB = nullptr;
-    childC = nullptr;
-    childD = nullptr;
-
-    elts = nullptr;
 }
 
 float Map::getA(){
@@ -49,7 +42,7 @@ Map Map::getChildD(){
 }
 
 bool Map::isLeaf(){
-    if(childA == nullptr && childB == nullptr && childC == nullptr && childD == nullptr){
+    if(childA && childB && childC && childD){
         return true;
     }
     return false;

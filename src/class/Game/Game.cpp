@@ -53,6 +53,7 @@ void Game::handleClick(Vector * vecClick) {
 }
 
 void Game::loadPlay() {
+    images->setDelta(deltaCamera);
     actionAreas.clear();
     nbPlayers = 4;
     for (int i = 0; i < nbPlayers; i++) {
@@ -88,6 +89,7 @@ void Game::loadPlay() {
 }
 
 void Game::loadIntro() {
+    images->setDelta(deltaCamera);
     nbPlayers = 1;
     players[0].setPos(new Vector(0.0, 0.0));
     players[0].setPlayerNumber(0);
@@ -158,8 +160,8 @@ void Game::renderIntro() {
     players[0].render();
     players[0].drawTriangle();
     draw.render(blocks, nbPlayers);
-
-    image.render();
+    
+    images->render(1);
 }
 
 void Game::renderStart() {
@@ -228,5 +230,9 @@ void Game::handleAction() {
             }
         }
     }
+}
+
+void Game::setImage(Image * yimages) {
+    images = yimages;
 }
 
