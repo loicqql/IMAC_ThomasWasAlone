@@ -64,7 +64,7 @@ bool Elt::isLeaf(){
     // if (childA == nullptr && childB == nullptr && childC == nullptr && childD == nullptr){
     //     return true;
     // }
-    if (childA == 0x0 && childB == 0x0 && childC == 0x0 && childD == 0x0){
+    if (!childA && !childB && !childC && !childD){
         return true;
     }
     return false;
