@@ -1,5 +1,9 @@
 #pragma once
-#include <GL/glu.h>
+#if defined(__APPLE__)
+    #include <OpenGL/glu.h>
+    #else
+    #include <GL/glu.h>
+#endif
 
 using namespace std;
 
