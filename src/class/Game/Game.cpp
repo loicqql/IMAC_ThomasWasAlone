@@ -33,7 +33,7 @@ Game::Game() {
     blocks.push_back(aBlock);
     */
 
-    Block * a = new Block(new Box(10.0, 10.0, (0.0) - deltaCamera->getX(), (10.0) - deltaCamera->getY()));
+    Block * a = new Block(new Box(10.0, 10.0, (20.0) - deltaCamera->getX(), (20.0) - deltaCamera->getY()));
     Block * b = new Block(new Box(10.0, 10.0, (1100.0) - deltaCamera->getX(), (800.0) - deltaCamera->getY()));
     Block * c = new Block(new Box(10, 10.0, (1100.0) - deltaCamera->getX(), (10.0) - deltaCamera->getY()));
     Block * d = new Block(new Box(10.0, 10.0, (30.0) - deltaCamera->getX(), (800.0) - deltaCamera->getY()));
@@ -51,8 +51,9 @@ Game::Game() {
     map = new Map(1920, 1080);
     map->buildMap(allBlocks);
 
-    vector<Block *> * leaves;
-    map->getLeaves(leaves, map->getRoot());
+    //cout << "c'est un test incr : " << map->getRoot()->getChildB()->getBlocks()[0].getBox()->getY() << endl;
+
+    map->getLeaves(map->getRoot());
 
     //set Delta to everyone
     draw.setDelta(deltaCamera);
@@ -88,7 +89,7 @@ void Game::render() {
     }
 
     draw.render(blocks);
-    //map->drawMap();
+    map->drawMap();
 
     //debug zoom
     camera.showArea();

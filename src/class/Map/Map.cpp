@@ -44,21 +44,25 @@ void Map::buildMap(vector<Block*> b){
 //     return leaves;
 // }
 
-void Map::getLeaves(vector<Block*> * leaves, Elt * node){
+void Map::getLeaves(Elt * node){
     
     if(node->isLeaf() && node->getNbBlocks() > 0 && node){
         Block * blocks = node->getBlocks();
         for(int i = 0 ; i < node->getNbBlocks() ; i++){
-            //Segmentation fault avec le push_back
-            //pour blocks[i] est accessible et existe
-            leaves->push_back(&(blocks[i]));
+            //Blocks sans box sont ajoutés 
+            //Pb vient pas de l'arbre
+            //les blocks sont ok
+            if(blocks[i].getBox() != nullptr){
+                leaves.push_back(&(blocks[i]));
+            }
+            
         }   
     }
     if(!node->isLeaf()){
-        getLeaves(leaves, node->getChildA());
-        getLeaves(leaves, node->getChildB());
-        getLeaves(leaves, node->getChildC());
-        getLeaves(leaves, node->getChildD());
+        getLeaves(node->getChildA());
+        getLeaves(node->getChildB());
+        getLeaves(node->getChildC());
+        getLeaves(node->getChildD());
     }
 
 }
@@ -98,7 +102,7 @@ vector<Block*> Map::search(Vector pos){
 //     return blocks;
 // }
 
-void Map::drawMap(vector<Block *> leaves){
+void Map::drawMap(){
     // for(uint i = 0 ; i < getLeaves(bLeaves, r).size() ; i++){
     //     bLeaves->push_back(getLeaves(bLeaves, r)[i]);
     // }
