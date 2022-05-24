@@ -53,6 +53,7 @@ void Game::handleClick(Vector * vecClick) {
 }
 
 void Game::loadPlay() {
+    actionAreas.clear();
     nbPlayers = 4;
     for (int i = 0; i < nbPlayers; i++) {
         players[i].setPos(new Vector(10.0 * i, 0.0));
@@ -91,15 +92,27 @@ void Game::loadIntro() {
     players[0].setPos(new Vector(0.0, 0.0));
     players[0].setPlayerNumber(0);
     blocks.push_back(new Block(players[0].getBox()));
-    
-    players[0].setColor(new Color(1.0, 0.0, 0.0));
 
-    //TEMP get from map
-    Box * box1 = new Box(150, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
+    Area * area1 = new Area(75.0, 100.0, -50.0, -47.5, 0.0);
+    Area * area2 = new Area(75.0, 100.0, 50.0, -47.5, 0.0);
+    area1->setAction(STARTLEVEL1);
+    area2->setAction(STARTLEVEL2);
+    actionAreas.push_back(area1);
+    actionAreas.push_back(area2);
+    
+    players[0].setColor(new Color(1.0, 1.0, 1.0));
+
+    Box * box1 = new Box(300, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
     blocks.push_back(new Block(box1));
 
-    Box * box2 = new Box(150, 5.0, (0.0) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
+    Box * box2 = new Box(300, 5.0, (0.0) - deltaCamera->getX(), (150.0) - deltaCamera->getY());
     blocks.push_back(new Block(box2));
+
+    Box * box3 = new Box(5.0, 205.0, (147.5) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box3));
+
+    Box * box4 = new Box(5.0, 205.0, (-147.5) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box4));
 
 
 }
@@ -138,6 +151,10 @@ void Game::renderPlay() {
 void Game::renderIntro() {
     ray.setBlocks(blocks);
     ray.render();
+    for(int i = 0; i < actionAreas.size(); ++i) {
+        draw.drawDoor(actionAreas[i]);
+    }
+    
     players[0].render();
     players[0].drawTriangle();
     draw.render(blocks, nbPlayers);
@@ -187,6 +204,26 @@ void Game::switchPlayer() {
             ++playerNum;
         }else {
             playerNum = 0;
+        }
+    }
+}
+
+void Game::handleAction() {
+    for(int i = 0; i < actionAreas.size(); ++i) {
+        Area * area = actionAreas[i];
+        if(area->test(players[playerNum].getPos())) {
+            switch (area->getAction()) {
+            case STARTLEVEL1:
+                    mode = PLAY;
+                    blocks.clear();
+                    loadPlay();
+                break;
+            case STARTLEVEL2:
+                    mode = PLAY;
+                    blocks.clear();
+                    loadPlay();
+                break;
+            }
         }
     }
 }

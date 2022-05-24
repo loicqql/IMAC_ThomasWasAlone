@@ -2,6 +2,8 @@
 
 using namespace std;
 
+#include "../Vector/Vector.hpp"
+
 class Area {
 	public:
 		Area(float uw, float uh, float ux, float uy, float uzoom);
@@ -11,9 +13,12 @@ class Area {
 		float getX();
         float getY();
         float getZoom();
+        int getAction();
         void setX(float ux);
         void setY(float uy);
         void setZoom(float uzoom);
+        void setAction(float uaction);
+        bool test(Vector * vec);
 
 	private:
         float w;
@@ -21,4 +26,5 @@ class Area {
         float x;
         float y;
         float zoom;
+        int action;
 };

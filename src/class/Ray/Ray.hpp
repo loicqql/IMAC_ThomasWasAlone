@@ -24,8 +24,6 @@ class Ray {
 	private:
         vector <Block*> blocks;
         Collision collision;
-        Vector * vec;
+        Vector * vecPos;
         Vector * deltaCamera;
-
-        int k;
 };

@@ -30,6 +30,10 @@ float Area::getZoom() {
     return zoom;
 }
 
+int Area::getAction() {
+    return action;
+}
+
 void Area::setX(float ux) {
     x = ux;
 }
@@ -40,4 +44,20 @@ void Area::setY(float uy) {
 
 void Area::setZoom(float uzoom) {
     zoom = uzoom;
+}
+
+void Area::setAction(float uaction) {
+    action = uaction;
+}
+
+bool Area::test(Vector * vec) {
+    float hW = getW() / 2;
+	float hH = getH() / 2;
+    if((vec->getX() > getX() - hW) && (vec->getX() < getX() + hW)) {
+        if((vec->getY() > getY() - hH) && (vec->getY() < getX() + hH)) {
+            return true;
+        }
+    }
+
+    return false;
 }

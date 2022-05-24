@@ -171,6 +171,9 @@ int main(int argc, char** argv) {
                     if(e.key.keysym.sym == 27) { //echap
                         game.pauseGame();
                     }
+                    if(e.key.keysym.sym == 13) { //echap
+                        game.handleAction();
+                    }
                     break;
                     
                 default:

@@ -37,7 +37,7 @@ Vector * Camera::playerMove(Vector * vecPos) {
 
 void Camera::setUpAreas() { 
 
-    Area * area1 = new Area(100.0, 100.0, (100.0) - delta->getX(), (-50.0) - delta->getY(), 1.5);
+    Area * area1 = new Area(100.0, 100.0, (100.0) - delta->getX(), (-50.0) - delta->getY(), 2.5);
     areas.push_back(area1);
 }
 
@@ -46,12 +46,8 @@ void Camera::testAreas(Vector * vecPos) {
     targetZoom = 1.0;
     for(int i = 0; i < areas.size(); ++i) {
         Area * area = areas[i];
-        float hW = area->getW() / 2;
-		float hH = area->getH() / 2;
-        if((vecPos->getX() > area->getX() - hW) && (vecPos->getX() < area->getX() + hW)) {
-            if((vecPos->getY() > area->getY() - hH) && (vecPos->getY() < area->getX() + hH)) {
-                targetZoom = area->getZoom();
-            }
+        if(area->test(vecPos)) {
+            targetZoom = area->getZoom();
         }
     }
 

@@ -37,3 +37,16 @@ void Draw::render(Block * block) {
 		glVertex2d((oneBox->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (oneBox->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
     glEnd();
 }
+
+void Draw::drawDoor(Area * area) {
+    float hW = area->getW() / 2;
+    float H = area->getH();
+    glColor3f(1, 1, 1);
+    glBegin(GL_LINE_LOOP);
+        glVertex2d((area->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (area->getY() + H - deltaCamera->getY()) / deltaCamera->getZ());
+        glVertex2d((area->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (area->getY() - deltaCamera->getY()) / deltaCamera->getZ());
+        glVertex2d((area->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (area->getY() - deltaCamera->getY()) / deltaCamera->getZ());
+        glVertex2d((area->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (area->getY() + H - deltaCamera->getY()) / deltaCamera->getZ());
+    glEnd();
+    
+}

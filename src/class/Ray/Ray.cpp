@@ -3,7 +3,7 @@
 using namespace std;
 
 Ray::Ray() {
-    k=0;
+    vecPos = new Vector(0.0, 50.0);
 }
 
 bool sortVector(Vector * v1, Vector * v2) {
@@ -19,7 +19,7 @@ void Ray::setDelta(Vector * delta) {
 
 void Ray::render() {
 
-    vec = new Vector(0.0, 50.0);
+    Vector * vec = new Vector(vecPos->getX(), vecPos->getY());
 
     float hW = 4.0 / 2;
     float hH = 4.0 / 2;
@@ -82,7 +82,7 @@ void Ray::render() {
                 break;
             }
         }
-        vec = new Vector(0.0, 50.0);
+        vec = new Vector(vecPos->getX(), vecPos->getY());
     }
 
     for(int i = 0; i < corners.size(); ++i)  {
@@ -96,7 +96,7 @@ void Ray::render() {
                 break;
             }
         }
-        vec = new Vector(0.0, 50.0);
+        vec = new Vector(vecPos->getX(), vecPos->getY());
     }
 
     //sort array

@@ -4,6 +4,7 @@
 #include "../Box/Box.hpp"
 #include "../Color/Color.hpp"
 #include "../Vector/Vector.hpp"
+#include "../Area/Area.hpp"
 
 #include <vector>
 
@@ -15,7 +16,8 @@ class Draw {
 
 		void setDelta(Vector * delta);
 		void render(vector <Block*> blocks, int nbPlayers);
-		void render(Block * block);      
+		void render(Block * block);
+		void drawDoor(Area * area);
 
 	private:
 		Vector * deltaCamera;
