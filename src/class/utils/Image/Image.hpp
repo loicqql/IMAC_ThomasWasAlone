@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-
+#include "../../../../lib/fakesdlimage.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
 
