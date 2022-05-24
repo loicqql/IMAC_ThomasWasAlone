@@ -49,6 +49,8 @@ vector<Block*> * Map::getLeaves(vector<Block*> * leaves, Elt * node){
     if(node->isLeaf() && node->getNbBlocks() > 0 && node != 0x0){
         Block * blocks = node->getBlocks();
         for(int i = 0 ; i < node->getNbBlocks() ; i++){
+            //Segmentation fault avec le push_back
+            //pour blocks[i] est accessible et existe
             leaves->push_back(&(blocks[i]));
         }   
     }
