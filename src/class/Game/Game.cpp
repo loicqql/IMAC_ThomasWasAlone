@@ -84,7 +84,8 @@ void Game::render() {
         block->updateMovement();
     }
 
-    //vector<Block *> bLeaves = map->getLeaves(map->getRoot());
+    vector<Block *> * leaves;
+    map->getLeaves(leaves, map->getRoot());
 
     draw.render(blocks);
     //map->drawMap();
