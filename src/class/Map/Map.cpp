@@ -47,15 +47,19 @@ void Map::buildMap(vector<Block*> b){
 void Map::getLeaves(Elt * node){
     
     if(node->isLeaf() && node->getNbBlocks() > 0 && node){
-        Block * blocks = node->getBlocks();
-        for(int i = 0 ; i < node->getNbBlocks() ; i++){
+        int size = node->getNbBlocks();
+        // cout << "size " << size << endl;
+        for(int i = 0 ; i < size ; i++){
             //Blocks sans box sont ajoutés 
-            //Pb vient pas de l'arbre
-            //les blocks sont ok
-            if(blocks[i].getBox() != nullptr){
-                leaves.push_back(&(blocks[i]));
-            }
-            
+            //Quand node a plrs blocks, ne prend que le 1er
+            //le 2nd dirige vers une box broken, autre
+            // cout << "passage n°" << i << endl;
+            cout << node->getBlocks()[i].getBox()->getY() << endl;
+            if(node->getBlocks()[i].getBox() != nullptr){
+                cout << "if validé"<< endl;
+                leaves.push_back(&(node->getBlocks()[i]));
+            } 
+            cout << "i = " << i << endl;
         }   
     }
     if(!node->isLeaf()){

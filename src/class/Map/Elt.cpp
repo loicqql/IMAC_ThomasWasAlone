@@ -86,17 +86,17 @@ void Elt::insertTree(Block * block){
 
             float w = getWidth()/2;
             float h = getHeight()/2;
-            float ACx = getOriginX();
-            float ABy = getOriginY();
-            float BDx = getOriginX() + (getWidth()/2) + 1;
-            float CDy = getOriginY() + (getHeight()/2) + 1;
+            float ACx = getOriginX() - w/2;
+            float ABy = getOriginY() + h/2;
+            float BDx = getOriginX() + w/2;
+            float CDy = getOriginY() - h/2;
 
             childA = new Elt(ACx, ABy, w, h);
 
             cout << "nb blocks childA : " << childA->getNbBlocks() << endl;
-            childB = new Elt(BDx, ABy, w-1, h);
-            childC = new Elt(ACx, CDy, w, h-1);
-            childD = new Elt(BDx, CDy, w-1, h-1);
+            childB = new Elt(BDx, ABy, w, h);
+            childC = new Elt(ACx, CDy, w, h);
+            childD = new Elt(BDx, CDy, w, h);
 
             
             //insert again block
@@ -116,7 +116,7 @@ void Elt::insertTree(Block * block){
             cout << "leaf not full -- debut" << endl;
 
             if(block->getBox()->isIn(origin->getX(), origin->getY(), w, h)){
-                blocks[nbBlocks] = block;
+                blocks[nbBlocks] = &block;
                 nbBlocks++;
                 cout << nbBlocks << endl;
             }

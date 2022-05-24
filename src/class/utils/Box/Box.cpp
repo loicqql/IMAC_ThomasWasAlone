@@ -33,8 +33,8 @@ void Box::setY(float uy) {
     y = uy;
 }
 
-bool Box::isIn(float areaX, float areaY, float w, float h){
-    if(x-w/2 < areaX + w && x+w/2 > areaX && y+h/2 > areaY && y-h/2 < areaY + h){
+bool Box::isIn(float areaX, float areaY, float width, float height){
+    if(x-w/2 < areaX + width/2 && x+w/2 > areaX - width/2 && y+h/2 > areaY-height/2 && y-h/2 < areaY + height/2){
         return true;
     }
     return false;    
