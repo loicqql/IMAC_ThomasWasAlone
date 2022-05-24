@@ -19,10 +19,9 @@ class Map {
         float getHeight();
 		Elt * getRoot();
 		void buildMap(vector<Block*>);
-		vector<Elt *> getLeaves(Elt * node);
-		vector<Elt *> getLeaves(vector<Elt *> leaves, Elt * node);
-		//vector<Block*> * getLeaves(vector<Block*> * bLeaves, Elt * node);
-		void drawMap(vector<Elt *> leaves);
+		//vector<Elt *> getLeaves(vector<Elt *> leaves, Elt * node);
+		vector<Block*> * getLeaves(vector<Block*> * leaves, Elt * node);
+		void drawMap(vector<Block *> leaves);
 
 		vector<Block*> search(Vector);
 
