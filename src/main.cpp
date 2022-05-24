@@ -155,7 +155,7 @@ int main(int argc, char** argv) {
         game.render();
         
 
-        vecInput = nullptr;
+        vecInput = 0;
 
         /* Echange du front et du back buffer : mise a jour de la fenetre */
         SDL_GL_SwapWindow(window);
@@ -228,7 +228,7 @@ int main(int argc, char** argv) {
             SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
         }
 
-        if(vecInput == nullptr) {
+        if(vecInput == 0) {
             vecInput = new Vector(0.0, 0.0);
         }
     }
