@@ -17,6 +17,7 @@
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Draw/Draw.hpp"
 #include "../utils/Area/Area.hpp"
+#include "../utils/Image/Image.hpp"
 
 #include "../Ray/Ray.hpp"
 
@@ -52,4 +53,5 @@ class Game {
 		vector <Area*> actionAreas;
 
 		Ray ray;
+		Image image;
 };

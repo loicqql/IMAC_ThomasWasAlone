@@ -158,6 +158,8 @@ void Game::renderIntro() {
     players[0].render();
     players[0].drawTriangle();
     draw.render(blocks, nbPlayers);
+
+    image.render();
 }
 
 void Game::renderStart() {
