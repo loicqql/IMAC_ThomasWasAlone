@@ -44,9 +44,9 @@ void Map::buildMap(vector<Block*> b){
 //     return leaves;
 // }
 
-vector<Block*> * Map::getLeaves(vector<Block*> * leaves, Elt * node){
+void Map::getLeaves(vector<Block*> * leaves, Elt * node){
     
-    if(node->isLeaf() && node->getNbBlocks() > 0 && node != 0x0){
+    if(node->isLeaf() && node->getNbBlocks() > 0 && node){
         Block * blocks = node->getBlocks();
         for(int i = 0 ; i < node->getNbBlocks() ; i++){
             //Segmentation fault avec le push_back
@@ -61,7 +61,6 @@ vector<Block*> * Map::getLeaves(vector<Block*> * leaves, Elt * node){
         getLeaves(leaves, node->getChildD());
     }
 
-    return leaves;
 }
 
 vector<Block*> Map::search(Vector pos){

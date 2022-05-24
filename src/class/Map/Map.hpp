@@ -20,7 +20,7 @@ class Map {
 		Elt * getRoot();
 		void buildMap(vector<Block*>);
 		//vector<Elt *> getLeaves(vector<Elt *> leaves, Elt * node);
-		vector<Block*> * getLeaves(vector<Block*> * leaves, Elt * node);
+		void getLeaves(vector<Block*> * leaves, Elt * node);
 		void drawMap(vector<Block *> leaves);
 
 		vector<Block*> search(Vector);

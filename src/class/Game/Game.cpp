@@ -51,6 +51,9 @@ Game::Game() {
     map = new Map(1920, 1080);
     map->buildMap(allBlocks);
 
+    vector<Block *> * leaves;
+    map->getLeaves(leaves, map->getRoot());
+
     //set Delta to everyone
     draw.setDelta(deltaCamera);
     for (int i = 0; i < 4; i++) {
@@ -83,9 +86,6 @@ void Game::render() {
         Block * block = blocks[i];
         block->updateMovement();
     }
-
-    vector<Block *> * leaves;
-    map->getLeaves(leaves, map->getRoot());
 
     draw.render(blocks);
     //map->drawMap();
