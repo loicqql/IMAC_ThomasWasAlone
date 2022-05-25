@@ -19,11 +19,13 @@ class Ray {
         void render();
         void setBlocks(vector <Block*> blks);
         void setDelta(Vector * delta);
-        void test(Vector * vec);
+        void setPos(Vector * vec);
 
 	private:
         vector <Block*> blocks;
         Collision collision;
         Vector * vecPos;
         Vector * deltaCamera;
+
+        void test(Vector * vec);
 };

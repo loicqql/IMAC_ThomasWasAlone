@@ -21,8 +21,7 @@ class Gui {
 		bool testAreas(Vector * vecClick);
 		void setUpAreasStart();
         void setUpAreasPause();
-        void showStart();
-        void showPause();
+		void clearArea();
 
 		//debug
 		void showArea();

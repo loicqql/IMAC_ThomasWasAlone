@@ -21,7 +21,8 @@ class Camera {
 		Vector * playerMove(Vector * vecPos);
 		Vector * getDelta();
 		void testAreas(Vector * vecPos);
-		void setUpAreas();
+		void addAreas(Area * area);
+		void clearAreas();
 
 		//debug
 		void showArea();

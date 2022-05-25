@@ -39,10 +39,12 @@ void Game::handleClick(Vector * vecClick) {
             switch (mode) {
                 case START:
                     mode = INTRO;
+                    gui.clearArea();
                     blocks.clear();
                     loadIntro();
                     break;
                 case PAUSE:
+                    gui.clearArea();
                     mode = PLAY;
                     break;
                 default:
@@ -53,6 +55,7 @@ void Game::handleClick(Vector * vecClick) {
 }
 
 void Game::loadPlay() {
+    camera.clearAreas();
     images->setDelta(deltaCamera);
     actionAreas.clear();
     nbPlayers = 4;
@@ -89,14 +92,16 @@ void Game::loadPlay() {
 }
 
 void Game::loadIntro() {
+    camera.clearAreas();
+    camera.addAreas(new Area(50, 50, 0, -25, 0.7));
     images->setDelta(deltaCamera);
     nbPlayers = 1;
     players[0].setPos(new Vector(0.0, 0.0));
     players[0].setPlayerNumber(0);
     blocks.push_back(new Block(players[0].getBox()));
 
-    Area * area1 = new Area(75.0, 100.0, -50.0, -47.5, 0.0);
-    Area * area2 = new Area(75.0, 100.0, 50.0, -47.5, 0.0);
+    Area * area1 = new Area(75.0, 100.0, -75.0, -47.5, 0.0);
+    Area * area2 = new Area(75.0, 100.0, 75.0, -47.5, 0.0);
     area1->setAction(STARTLEVEL1);
     area2->setAction(STARTLEVEL2);
     actionAreas.push_back(area1);
@@ -123,7 +128,10 @@ void Game::pauseGame() {
     if(mode == PLAY) {
         gui.setUpAreasPause();
         mode = PAUSE;
-    }    
+    }else if (mode == PAUSE) {
+        gui.clearArea();
+        mode = PLAY;
+    }
 }
 
 void Game::renderPlay() {
@@ -161,12 +169,11 @@ void Game::renderIntro() {
     players[0].drawTriangle();
     draw.render(blocks, nbPlayers);
     
-    images->render(1);
+    //debug zoom
+    //camera.showArea();
 }
 
 void Game::renderStart() {
-
-    gui.showStart();
 
     //debug menu
     gui.showArea();
@@ -175,8 +182,8 @@ void Game::renderStart() {
 
 void Game::renderPause() {
 
-    
-    gui.showStart();
+    images->render(1);
+
 
     //debug menu
     gui.showArea();

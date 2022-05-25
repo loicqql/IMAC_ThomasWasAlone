@@ -21,6 +21,10 @@ void Gui::setUpAreasPause() {
     areas.push_back(area1);
 }
 
+void Gui::clearArea() {
+    areas.clear();
+}
+
 bool Gui::testAreas(Vector * vecClick) {
     for(int i = 0; i < areas.size(); ++i) {
         Area * area = areas[i];
@@ -33,14 +37,6 @@ bool Gui::testAreas(Vector * vecClick) {
         }
     }
     return false;
-}
-
-void Gui::showStart() {
-    
-}
-
-void Gui::showPause() {
-    
 }
 
 void Gui::showArea() {

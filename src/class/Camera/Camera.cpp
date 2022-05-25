@@ -7,8 +7,6 @@ Camera::Camera() {
     targetZoom = 1.0;
     delta = new Vector(0,0);
     delta->setZ(1.0);
-
-    setUpAreas();
 }
 
 Vector * Camera::getDelta() {
@@ -35,10 +33,12 @@ Vector * Camera::playerMove(Vector * vecPos) {
     return delta;
 }
 
-void Camera::setUpAreas() { 
+void Camera::addAreas(Area * area) { 
+    areas.push_back(area);
+}
 
-    Area * area1 = new Area(100.0, 100.0, (100.0) - delta->getX(), (-50.0) - delta->getY(), 2.5);
-    areas.push_back(area1);
+void Camera::clearAreas() {
+    areas.clear();
 }
 
 void Camera::testAreas(Vector * vecPos) {

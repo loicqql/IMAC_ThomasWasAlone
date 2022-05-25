@@ -205,7 +205,7 @@ int main(int argc, char** argv) {
                     if(e.key.keysym.sym == 27) { //echap
                         game.pauseGame();
                     }
-                    if(e.key.keysym.sym == 13) { //echap
+                    if(e.key.keysym.sym == 13) { //enter
                         game.handleAction();
                     }
                     break;
@@ -220,6 +220,12 @@ int main(int argc, char** argv) {
             vecInput = new Vector(-3.0, 0.0);
         }
         if(keystates[SDL_SCANCODE_RIGHT]) {
+            vecInput = new Vector(3.0, 0.0);
+        }
+        if(keystates[SDL_SCANCODE_A]) {
+            vecInput = new Vector(-3.0, 0.0);
+        }
+        if(keystates[SDL_SCANCODE_D]) {
             vecInput = new Vector(3.0, 0.0);
         }
         if(keystates[SDL_SCANCODE_SPACE]) {

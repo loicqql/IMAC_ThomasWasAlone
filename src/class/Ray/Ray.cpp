@@ -17,10 +17,15 @@ void Ray::setDelta(Vector * delta) {
     deltaCamera = delta; 
 }
 
+void Ray::setPos(Vector * vec) {
+    vecPos = vec;
+}
+
 void Ray::render() {
 
     Vector * vec = new Vector(vecPos->getX(), vecPos->getY());
 
+    /*
     float hW = 4.0 / 2;
     float hH = 4.0 / 2;
     glColor3f(255 / 44.0, 255 / 55.0, 255 / 101.0);
@@ -30,6 +35,7 @@ void Ray::render() {
         glVertex2d((vec->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
 		glVertex2d((vec->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
     glEnd();
+    */
 
     vector <Vector*> corners;
 
@@ -54,19 +60,6 @@ void Ray::render() {
         corners.push_back(new Vector(oneBox->getX() - W, oneBox->getY() + H));
         corners.push_back(new Vector(oneBox->getX() - W, oneBox->getY() - H));
     }
-
-    //TEST DRAW
-    // for(int i = 0; i < corners.size(); ++i) {
-    //     float hW = 4.0 / 2;
-    //         float hH = 4.0 / 2;
-    //         glColor3f(255 / 44.0, 255 / 55.0, 255 / 101.0);
-    //         glBegin(GL_POLYGON);
-    //         glVertex2d((corners[i]->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (corners[i]->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
-    //         glVertex2d((corners[i]->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (corners[i]->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
-    //         glVertex2d((corners[i]->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (corners[i]->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
-    //         glVertex2d((corners[i]->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (corners[i]->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
-    //     glEnd();
-    // }
 
     vector <Vector*> intersects;
 
@@ -126,48 +119,6 @@ void Ray::render() {
     
     glEnd();
 
- 
-    
-    //glVertex2d((-100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
-    //glVertex2d((100 - deltaCamera->getX()) / deltaCamera->getZ(), (50 - deltaCamera->getY()) / deltaCamera->getZ());
-
-    /*
-
-    cout << "-1-" << endl;
-
-
-
-    for(int i = 0; i < intersects.size(); ++i) {
-        Vector * intersect = intersects[i];
-
-            if(k == i) {
-                glColor3f(1.0, 1.0, 1.0);
-
-            }else {
-                glColor3f(1.0, 0.0, 0.0);
-            }
-
-            
-
-            cout << intersect->getAngle() << endl;
-        
-            test(intersect);
-
-  
-        
-    }
-
-
-    k++;
-    
-    if(k >= intersects.size()) {
-        k=0;
-    }
-
-    */
-
-
-
 }
 
 void Ray::test(Vector * vec) {
@@ -178,11 +129,6 @@ void Ray::test(Vector * vec) {
         glVertex2d(((vec->getX() + hW) - deltaCamera->getX()) / deltaCamera->getZ(), ((vec->getY() - hH) - deltaCamera->getY()) / deltaCamera->getZ());
         glVertex2d(((vec->getX() - hW) - deltaCamera->getX()) / deltaCamera->getZ(), ((vec->getY() - hH) - deltaCamera->getY()) / deltaCamera->getZ());
 		glVertex2d(((vec->getX() - hW) - deltaCamera->getX()) / deltaCamera->getZ(), ((vec->getY() + hH) - deltaCamera->getY()) / deltaCamera->getZ());
-
-        // glVertex2d(vec->getX() + hW, vec->getY() + hH);
-        // glVertex2d(vec->getX() + hW, vec->getY() - hH);
-        // glVertex2d(vec->getX() - hW, vec->getY() - hH);
-		// glVertex2d(vec->getX() - hW, vec->getY() + hH);
     glEnd();
 }
 
