@@ -74,48 +74,108 @@ void Player::move(Vector *vecInput) {
 
 	ax = vecInput->getX() != 0 ? vecInput->getX() : ax;
 
-	if(canJump) {
+	// if(canJump) {
 		ay = vecInput->getY() != 0 ? vecInput->getY() : ay;
 		if(vecInput->getY() != 0) {
 			canJump = false;
 		}
-	}
+	// }
 
-	if(!collision.testCollision(box, blocks, playerNumber)) {
-		ay -= 0.5;
-	} else {
-		ay = 0.0;
-	}
+	ay -= 0.5; // gravity
 
-	if(collision.getCollision(box, blocks, playerNumber) == 'b') {
-		canJump = true;
-	}
-	
+	//CAP AX AY
+	ax = ax > 3.0 ? 3.0 : ax;
+	ax = ax < -3.0 ? -3.0 : ax;
+
+	ay = ay > 5.0 ? 5.0 : ay;
+	ay = ay < -5.0 ? -5.0 : ay;
+
+	float reX = 0.0;
+	float reY = 0.0;
+
 	if(ax > 0) {
-		ax -= 0.5;
+		reX = 3.0 / 100.0;
+	}
+	if(ax < 0) {
+		reX = -3.0 / 100.0;
 	}
 
-	if(ax < 0) {
-		ax += 0.5;
+	if(ay > 0) {
+		reY = 5.0 / 100.0;
+	}
+	if(ay < 0) {
+		reY = -5.0 / 100.0;
 	}
 
 	Vector d = Vector(ax, ay);
-
 	pos->add(d);
-
 	box->setX(pos->getX());
 	box->setY(pos->getY());
 
-	/*cout << "-----" << endl;
+	int k = 0;
+
+	while(collision.testCollision(box, blocks, playerNumber)) {
+		ax = ax - reX;
+		ay = ay - reY;
+		pos->subtract(Vector(reX, reY));
+		box->setX(pos->getX());
+		box->setY(pos->getY());
+		k++;
+	}
+
+	if(ax < 0.1 && ax > -0.1) {
+		ax = 0.0;
+	}
+	if(ay < 0.1 && ay > -0.1) {
+		ay = 0.0;
+	}
+
+	if(ax > 0) {
+		if(ax > 0.5) {
+			ax -= 0.5;
+		}else {
+			ax = 0.0;
+		}
+	}
+
+	if(ax < 0) {
+		if(ax < -0.5) {
+			ax += 0.5;
+		}else {
+			ax = 0.0;
+		}
+	}
+		
+
+	cout << "-----" << endl;
 	cout << ax << endl;
 	cout << ay << endl;
-	cout << "-----" << endl;*/
+	cout << "-----" << endl;
 
-	if(collision.testCollision(box, blocks, playerNumber)) {
-		pos->subtract(d);
-	}
+	// if(!collision.testCollision(box, blocks, playerNumber)) {
+		
+	// } else {
+	// 	ay = 0.0;
+	// }
 
-	if(collision.getCollision(box, blocks, playerNumber) == 'b') {
-		canJump = true;
-	}
+	// if(collision.getCollision(box, blocks, playerNumber) == 'b') {
+	// 	canJump = true;
+	// }
+	
+	// if(ax > 0) {
+	// 	ax -= 0.5;
+	// }
+
+	// if(ax < 0) {
+	// 	ax += 0.5;
+	// }
+
+
+	// if(collision.testCollision(box, blocks, playerNumber)) {
+	// 	pos->subtract(d);
+	// }
+
+	// if(collision.getCollision(box, blocks, playerNumber) == 'b') {
+	// 	canJump = true;
+	// }
 }
