@@ -96,7 +96,6 @@ void Game::render() {
     }
 
     draw.render(blocks);
-    map->drawMap();
 
     //debug zoom
     camera.showArea();

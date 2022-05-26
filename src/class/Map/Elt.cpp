@@ -14,10 +14,10 @@ Elt::Elt(float x, float y, float width, float height) {
     w = width;
     h = height;
 
-    blocks[0] = nullptr;
-    blocks[1] = nullptr;
-    blocks[2] = nullptr;
-    blocks[3] = nullptr;
+    block1 = nullptr;
+    block2 = nullptr;
+    block3 = nullptr;
+    block4 = nullptr;
 }
 
 Vector * Elt::getOrigin(){
@@ -70,8 +70,20 @@ bool Elt::isLeaf(){
     return false;
 }
 
-Block * Elt::getBlocks(){
-    return *blocks;
+Block * Elt::getBlock1(){
+    return block1;
+}
+
+Block * Elt::getBlock2(){
+    return block2;
+}
+
+Block * Elt::getBlock3(){
+    return block3;
+}
+
+Block * Elt::getBlock4(){
+    return block4;
 }
 
 void Elt::insertTree(Block * block){
@@ -103,10 +115,14 @@ void Elt::insertTree(Block * block){
             insertTree(block);
 
             //move blocks that can't be in this node as it's not a leaf anymore
-            for(int i = 0 ; i < nbBlocks ; i++){
-                insertTree(blocks[i]);
-                blocks[i] = nullptr;
-            }
+            insertTree(block1);
+            insertTree(block2);
+            insertTree(block3);
+            insertTree(block4);
+            block1 = nullptr;
+            block2 = nullptr;
+            block3 = nullptr;
+            block4 = nullptr;
             nbBlocks = 0;
 
             cout << "leaf full -- fin" << endl;
@@ -116,7 +132,15 @@ void Elt::insertTree(Block * block){
             cout << "leaf not full -- debut" << endl;
 
             if(block->getBox()->isIn(origin->getX(), origin->getY(), w, h)){
-                blocks[nbBlocks] = block;
+                if(nbBlocks == 0){
+                    block1 = block;
+                }else if(nbBlocks == 1){
+                    block2 = block;
+                }else if(nbBlocks == 2){
+                    block3 = block;
+                }else if(nbBlocks == 3){
+                    block4 = block;
+                }
                 nbBlocks++;
                 cout << nbBlocks << endl;
             }
@@ -156,7 +180,10 @@ vector<Block*> Elt::search(Vector pos){
 
     if(isLeaf()){//is leaf
         for(int i = 0 ; i < getNbBlocks() ; i++){
-            blocks.push_back(&(getBlocks()[i]));
+            blocks.push_back(block1);
+            blocks.push_back(block2);
+            blocks.push_back(block3);
+            blocks.push_back(block4);
         }
     }else{//not leaf
         if(pos.isIn(childA->getOriginX(), childA->getOriginY(), childA->getWidth(), childA->getHeight())){

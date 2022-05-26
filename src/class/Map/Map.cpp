@@ -47,20 +47,28 @@ void Map::buildMap(vector<Block*> b){
 void Map::getLeaves(Elt * node){
     
     if(node->isLeaf() && node->getNbBlocks() > 0 && node){
-        int size = node->getNbBlocks();
         // cout << "size " << size << endl;
-        for(int i = 0 ; i < size ; i++){
-            //Blocks sans box sont ajoutés 
-            //Quand node a plrs blocks, ne prend que le 1er
-            //le 2nd dirige vers une box broken, autre
-            // cout << "passage n°" << i << endl;
-            //cout << node->getBlocks()[i].getBox()->getY() << endl;
-            if(node->getBlocks()[i].getBox() != nullptr){
-                cout << "if validé"<< endl;
-                leaves.push_back(&(node->getBlocks()[i]));
-            } 
-            cout << "i = " << i << endl;
-        }   
+        if(node->getNbBlocks() > 0){
+            if(node->getBlock1()->getBox() != nullptr){
+                leaves.push_back(node->getBlock1());
+            }
+        }
+        if(node->getNbBlocks() > 1){
+            if(node->getBlock2()->getBox() != nullptr){
+                leaves.push_back(node->getBlock2());
+            }
+        }
+        if(node->getNbBlocks() > 2){
+            if(node->getBlock3()->getBox() != nullptr){
+                leaves.push_back(node->getBlock3());
+            }
+        }
+        if(node->getNbBlocks() > 3){
+            if(node->getBlock4()->getBox() != nullptr){
+                leaves.push_back(node->getBlock4());
+            }
+        }
+        
     }
     if(!node->isLeaf()){
         getLeaves(node->getChildA());
@@ -106,25 +114,25 @@ vector<Block*> Map::search(Vector pos){
 //     return blocks;
 // }
 
-void Map::drawMap(){
-    // for(uint i = 0 ; i < getLeaves(bLeaves, r).size() ; i++){
-    //     bLeaves->push_back(getLeaves(bLeaves, r)[i]);
-    // }
-    //cout << "is empty? " << leaves.size() << endl;
-    //cout << "leaves : " << bLeaves[0]->getBlocks()[0].getBox()->getY() << endl;
+// void Map::drawMap(){
+//     // for(uint i = 0 ; i < getLeaves(bLeaves, r).size() ; i++){
+//     //     bLeaves->push_back(getLeaves(bLeaves, r)[i]);
+//     // }
+//     //cout << "is empty? " << leaves.size() << endl;
+//     //cout << "leaves : " << bLeaves[0]->getBlocks()[0].getBox()->getY() << endl;
     
-    //draw.render(&(leaves[0].getBlocks()[0]));
+//     //draw.render(&(leaves[0].getBlocks()[0]));
 
-    // vector <Block*> allBlocks;
+//     // vector <Block*> allBlocks;
 
-    // for(uint i = 0 ; i < leaves.size() ; i++){
-    //     for(int j = 0 ; j < leaves.at(i)->getNbBlocks() ; j++){
-    //         allBlocks.push_back(leaves[i]->getBlocks()[i]);
-    //     }
-    // }
+//     // for(uint i = 0 ; i < leaves.size() ; i++){
+//     //     for(int j = 0 ; j < leaves.at(i)->getNbBlocks() ; j++){
+//     //         allBlocks.push_back(leaves[i]->getBlocks()[i]);
+//     //     }
+//     // }
 
-    draw.render(leaves);
-}
+//     draw.render(leaves);
+// }
 
 vector<Elt *> Map::allElt(){
     vector<Elt *> elts;

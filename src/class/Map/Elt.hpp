@@ -24,8 +24,12 @@ class Elt {
 		Elt * getChildC();
 		Elt * getChildD();
 
+		Block * getBlock1();
+		Block * getBlock2();
+		Block * getBlock3();
+		Block * getBlock4();
+
 		bool isLeaf();
-		Block * getBlocks();
 		void insertTree(Block*);
 
 		vector<Block*> search(Vector);
@@ -44,5 +48,9 @@ class Elt {
 		Elt *childD;
 
 		int nbBlocks;
-		Block * blocks[4]; //list of 2D elements composing the map, max 4 elements 
+		
+		Block *block1;
+		Block *block2;
+		Block *block3;
+		Block *block4;
 };
