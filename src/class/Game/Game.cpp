@@ -57,8 +57,6 @@ Game::Game() {
     map = new Map(1920, 1080);
     map->buildMap(allBlocks);
 
-    //cout << "c'est un test incr : " << map->getRoot()->getChildB()->getBlocks()[0].getBox()->getY() << endl;
-
     map->getLeaves(map->getRoot());
 
     //set Delta to everyone

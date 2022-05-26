@@ -61,9 +61,6 @@ Elt * Elt::getChildD(){
 }
 
 bool Elt::isLeaf(){
-    // if (childA == nullptr && childB == nullptr && childC == nullptr && childD == nullptr){
-    //     return true;
-    // }
     if (!childA && !childB && !childC && !childD){
         return true;
     }
@@ -87,14 +84,10 @@ Block * Elt::getBlock4(){
 }
 
 void Elt::insertTree(Block * block){
-
-    cout << "nb blocks debut : " << nbBlocks << endl;
     
     if(isLeaf()){//is leaf
     
         if(nbBlocks >= 4 ){//leaf is full
-
-            cout << "leaf full -- debut" << endl << "------------CREER DES ENFANTS"<<endl;
 
             float w = getWidth()/2;
             float h = getHeight()/2;
@@ -104,13 +97,10 @@ void Elt::insertTree(Block * block){
             float CDy = getOriginY() - h/2;
 
             childA = new Elt(ACx, ABy, w, h);
-
-            cout << "nb blocks childA : " << childA->getNbBlocks() << endl;
             childB = new Elt(BDx, ABy, w, h);
             childC = new Elt(ACx, CDy, w, h);
             childD = new Elt(BDx, CDy, w, h);
 
-            
             //insert again block
             insertTree(block);
 
@@ -125,11 +115,7 @@ void Elt::insertTree(Block * block){
             block4 = nullptr;
             nbBlocks = 0;
 
-            cout << "leaf full -- fin" << endl;
-
         }else{//leaf is not full
-
-            cout << "leaf not full -- debut" << endl;
 
             if(block->getBox()->isIn(origin->getX(), origin->getY(), w, h)){
                 if(nbBlocks == 0){
@@ -144,14 +130,8 @@ void Elt::insertTree(Block * block){
                 nbBlocks++;
                 cout << nbBlocks << endl;
             }
-            cout << "leaf not full -- fin" << endl;
-
         }
     }else{//is not leaf
-
-        cout << "is not leaf -- debut" << endl;
-
-        cout << "isinB ? "<< block->getBox()->isIn(childB->origin->getX(), childB->origin->getY(), childB->getWidth(), childB->getHeight()) << endl;
 
         if(block->getBox()->isIn(childA->origin->getX(), childA->origin->getY(), childA->getWidth(), childA->getHeight())){
             cout << "isinA" << endl;
@@ -169,9 +149,6 @@ void Elt::insertTree(Block * block){
             cout << "isinD" << endl;
             childD->insertTree(block);
         }
-
-        cout << "is not leaf -- fin" << endl;
-
     }
 }
 
@@ -204,6 +181,7 @@ vector<Block*> Elt::search(Vector pos){
     return blocks;
 }
 
+//pas testée
 vector<Elt *> Elt::getAllElt(vector<Elt *> elts, Elt * node){
     if(isLeaf()){
         elts.push_back(this);

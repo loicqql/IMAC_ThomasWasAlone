@@ -25,24 +25,10 @@ Elt * Map::getRoot(){
 
 void Map::buildMap(vector<Block*> b){
     for(Block * i : b){
-        //cout << "getX" << i.getBox()->getY() << endl;
         r->insertTree(i);
     }
 
 }
-
-// vector<Elt *> Map::getLeaves(vector<Elt *> leaves, Elt * node){
-//     if(node->isLeaf() && node->getNbBlocks() > 0 && node != 0x0){
-//         leaves.push_back(node);
-//         cout << "added a leaf" << endl;
-//     }else if(!node->isLeaf()){
-//         getLeaves(leaves, node->getChildA());
-//         getLeaves(leaves, node->getChildB());
-//         getLeaves(leaves, node->getChildC());
-//         getLeaves(leaves, node->getChildD());
-//     }
-//     return leaves;
-// }
 
 void Map::getLeaves(Elt * node){
     
