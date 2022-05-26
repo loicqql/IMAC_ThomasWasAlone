@@ -35,7 +35,7 @@ void Vector::subtract(Vector vec) {
 }
 
 bool Vector::isIn(float areaX, float areaY, float w, float h){
-    if(x >= areaX && x <= areaX + w && y >= areaY && y <= areaY+h){
+    if(x >= areaX-w/2 && x <= areaX + w/2 && y >= areaY - h/2 && y <= areaY+h/2){
         return true;
     }
     return false;    

@@ -65,7 +65,7 @@ void Map::getLeaves(Elt * node){
 
 }
 
-vector<Block*> Map::search(Vector pos){
+vector<Block*> Map::search(Vector * pos){
     return r->search(pos);
 }
 

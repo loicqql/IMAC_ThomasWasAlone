@@ -23,7 +23,7 @@ class Map {
 		void getLeaves(Elt * node);
 		void drawMap();
 
-		vector<Block*> search(Vector);
+		vector<Block*> search(Vector*);
 
 		vector<Elt *> allElt();
 		

@@ -59,6 +59,8 @@ Game::Game() {
 
     map->getLeaves(map->getRoot());
 
+    vector<Block*> blocksNearPlayer = map->search(players[0].getPos());
+
     //set Delta to everyone
 
     draw.setDelta(deltaCamera);

@@ -147,7 +147,7 @@ void Elt::insertTree(Block * block){
     }
 }
 
-vector<Block*> Elt::search(Vector pos){
+vector<Block*> Elt::search(Vector* pos){
     vector<Block*> blocks;
 
     if(isLeaf()){//is leaf
@@ -158,21 +158,36 @@ vector<Block*> Elt::search(Vector pos){
             blocks.push_back(block4);
         }
     }else{//not leaf
-        if(pos.isIn(childA->getOriginX(), childA->getOriginY(), childA->getWidth(), childA->getHeight())){
-            blocks.insert(blocks.end(), childA->search(pos).begin(), childA->search(pos).end());      
+        if(pos->isIn(childA->getOriginX(), childA->getOriginY(), childA->getWidth(), childA->getHeight())){
+            insertBlocks(childA, &blocks);
         }
-        if(pos.isIn(childB->getOriginX(), childB->getOriginY(), childB->getWidth(), childB->getHeight())){
-            blocks.insert(blocks.end(), childB->search(pos).begin(), childB->search(pos).end());
+        if(pos->isIn(childB->getOriginX(), childB->getOriginY(), childB->getWidth(), childB->getHeight())){
+            insertBlocks(childB, &blocks);
         }
-        if(pos.isIn(childC->getOriginX(), childC->getOriginY(), childC->getWidth(), childC->getHeight())){
-            blocks.insert(blocks.end(), childC->search(pos).begin(), childC->search(pos).end());
+        if(pos->isIn(childC->getOriginX(), childC->getOriginY(), childC->getWidth(), childC->getHeight())){
+            insertBlocks(childC, &blocks);
         }
-        if(pos.isIn(childD->getOriginX(), childD->getOriginY(), childD->getWidth(), childD->getHeight())){
-            blocks.insert(blocks.end(), childD->search(pos).begin(), childD->search(pos).end());
+        if(pos->isIn(childD->getOriginX(), childD->getOriginY(), childD->getWidth(), childD->getHeight())){
+            insertBlocks(childD, &blocks);
         }
     }
    
     return blocks;
+}
+
+void Elt::insertBlocks(Elt * area, vector<Block*> * vector){
+    if(area->getNbBlocks()>0){
+        vector->push_back(area->getBlock1()); 
+    }
+    if(area->getNbBlocks()>1){
+        vector->push_back(area->getBlock2()); 
+    }
+    if(area->getNbBlocks()>2){
+        vector->push_back(area->getBlock3()); 
+    }
+    if(area->getNbBlocks()>3){
+        vector->push_back(area->getBlock4()); 
+    }
 }
 
 //pas testée
