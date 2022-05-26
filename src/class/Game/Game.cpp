@@ -35,10 +35,13 @@ Game::Game() {
 
     Block * a = new Block(new Box(10.0, 10.0, (20.0) - deltaCamera->getX(), (20.0) - deltaCamera->getY()));
     Block * b = new Block(new Box(10.0, 10.0, (800.0) - deltaCamera->getX(), (-400.0) - deltaCamera->getY()));
-    Block * c = new Block(new Box(10, 10.0, (800.0) - deltaCamera->getX(), (10.0) - deltaCamera->getY()));
+    Block * c = new Block(new Box(10, 10.0, (-800.0) - deltaCamera->getX(), (10.0) - deltaCamera->getY()));
     Block * d = new Block(new Box(10.0, 10.0, (-100.0) - deltaCamera->getX(), (200.0) - deltaCamera->getY()));
     Block * e = new Block(new Box(10.0, 10.0, (-50.0) - deltaCamera->getX(), (-100.0) - deltaCamera->getY()));
-    //Block f = Block(new Box(75, 60.0, (30.0) - deltaCamera->getX(), (45.0) - deltaCamera->getY()));
+    // Block * f = new Block(new Box(10.0, 10.0, (-300.0) - deltaCamera->getX(), (200.0) - deltaCamera->getY()));
+    // Block * g = new Block(new Box(10.0, 10.0, (-320.0) - deltaCamera->getX(), (200.0) - deltaCamera->getY()));
+    // Block * h = new Block(new Box(10.0, 10.0, (-340.0) - deltaCamera->getX(), (200.0) - deltaCamera->getY()));
+    // Block * i = new Block(new Box(10.0, 10.0, (-360.0) - deltaCamera->getX(), (200.0) - deltaCamera->getY()));
     
     vector<Block*> allBlocks;
     allBlocks.push_back(a);
@@ -46,7 +49,10 @@ Game::Game() {
     allBlocks.push_back(c);
     allBlocks.push_back(d);
     allBlocks.push_back(e);
-    //allBlocks.push_back(f);
+    // allBlocks.push_back(f);
+    // allBlocks.push_back(g);
+    // allBlocks.push_back(h);
+    // allBlocks.push_back(i);
 
     map = new Map(1920, 1080);
     map->buildMap(allBlocks);
@@ -56,6 +62,7 @@ Game::Game() {
     map->getLeaves(map->getRoot());
 
     //set Delta to everyone
+
     draw.setDelta(deltaCamera);
     for (int i = 0; i < 4; i++) {
         players[i].setDelta(deltaCamera);
