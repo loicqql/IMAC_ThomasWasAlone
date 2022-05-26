@@ -128,25 +128,20 @@ void Elt::insertTree(Block * block){
                     block4 = block;
                 }
                 nbBlocks++;
-                cout << nbBlocks << endl;
             }
         }
     }else{//is not leaf
 
         if(block->getBox()->isIn(childA->origin->getX(), childA->origin->getY(), childA->getWidth(), childA->getHeight())){
-            cout << "isinA" << endl;
             childA->insertTree(block);
         }
         if(block->getBox()->isIn(childB->origin->getX(), childB->origin->getY(), childB->getWidth(), childB->getHeight())){
-            cout << "isinB" << endl;
             childB->insertTree(block);
         }
         if(block->getBox()->isIn(childC->origin->getX(), childC->origin->getY(), childC->getWidth(), childC->getHeight())){
-            cout << "isinC" << endl;
             childC->insertTree(block);
         }
         if(block->getBox()->isIn(childD->origin->getX(), childD->origin->getY(), childD->getWidth(), childD->getHeight())){
-            cout << "isinD" << endl;
             childD->insertTree(block);
         }
     }
@@ -164,8 +159,7 @@ vector<Block*> Elt::search(Vector pos){
         }
     }else{//not leaf
         if(pos.isIn(childA->getOriginX(), childA->getOriginY(), childA->getWidth(), childA->getHeight())){
-            blocks.insert(blocks.end(), childA->search(pos).begin(), childA->search(pos).end());
-            
+            blocks.insert(blocks.end(), childA->search(pos).begin(), childA->search(pos).end());      
         }
         if(pos.isIn(childB->getOriginX(), childB->getOriginY(), childB->getWidth(), childB->getHeight())){
             blocks.insert(blocks.end(), childB->search(pos).begin(), childB->search(pos).end());
