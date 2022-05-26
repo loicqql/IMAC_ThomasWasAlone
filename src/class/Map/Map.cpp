@@ -54,7 +54,7 @@ void Map::getLeaves(Elt * node){
             //Quand node a plrs blocks, ne prend que le 1er
             //le 2nd dirige vers une box broken, autre
             // cout << "passage n°" << i << endl;
-            cout << node->getBlocks()[i].getBox()->getY() << endl;
+            //cout << node->getBlocks()[i].getBox()->getY() << endl;
             if(node->getBlocks()[i].getBox() != nullptr){
                 cout << "if validé"<< endl;
                 leaves.push_back(&(node->getBlocks()[i]));

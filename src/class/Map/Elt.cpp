@@ -116,7 +116,7 @@ void Elt::insertTree(Block * block){
             cout << "leaf not full -- debut" << endl;
 
             if(block->getBox()->isIn(origin->getX(), origin->getY(), w, h)){
-                blocks[nbBlocks] = &block;
+                blocks[nbBlocks] = block;
                 nbBlocks++;
                 cout << nbBlocks << endl;
             }
