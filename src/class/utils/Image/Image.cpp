@@ -21,9 +21,9 @@ void Image::render(int index, Vector * shape, Vector * pos, bool camera) {
                 glVertex2f((pos->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() - deltaCamera->getY()) / deltaCamera->getZ());
                 glTexCoord2f(1.0f, 0.0f);
                 glVertex2f((pos->getX() + shape->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() - deltaCamera->getY()) / deltaCamera->getZ());
-                glTexCoord2f(1.0f, shape->getY() / shape->getX());
+                glTexCoord2f(1.0f, 1.0f);
                 glVertex2f((pos->getX() + shape->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() + shape->getY() - deltaCamera->getY()) / deltaCamera->getZ());
-                glTexCoord2f(0.0f, shape->getY() / shape->getX());
+                glTexCoord2f(0.0f, 1.0f);
                 glVertex2f((pos->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (pos->getY() + shape->getY() - deltaCamera->getY()) / deltaCamera->getZ());
             glEnd();
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -34,9 +34,9 @@ void Image::render(int index, Vector * shape, Vector * pos, bool camera) {
                 glVertex2f(pos->getX(), pos->getY());
                 glTexCoord2f(1.0f, 0.0f);
                 glVertex2f(pos->getX() + shape->getX(), pos->getY());
-                glTexCoord2f(1.0f, shape->getX() / shape->getY());
+                glTexCoord2f(1.0f, 1.0f);
                 glVertex2f(pos->getX() + shape->getX(), pos->getY() + shape->getY());
-                glTexCoord2f(0.0f, shape->getX() / shape->getY());
+                glTexCoord2f(0.0f, 1.0f);
                 glVertex2f(pos->getX(), pos->getY() + shape->getY());
             glEnd();
         glBindTexture(GL_TEXTURE_2D, 0);

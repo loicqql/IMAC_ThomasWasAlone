@@ -16,7 +16,7 @@
 #include "class/utils/Vector/Vector.hpp"
 #include "class/utils/Image/Image.hpp"
 
-#define NB_IMAGES 6
+#define NB_IMAGES 7
 
 GLuint * textures;
 Image images;
@@ -141,6 +141,7 @@ int main(int argc, char** argv) {
     loadImage(textures, IMG_Load("images/gagne.png"), 3);
     loadImage(textures, IMG_Load("images/panneauLevel1.png"), 4);
     loadImage(textures, IMG_Load("images/panneauLevel2.png"), 5);
+    loadImage(textures, IMG_Load("images/commandesIntro.png"), 6);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable( GL_BLEND );
