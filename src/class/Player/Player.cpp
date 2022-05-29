@@ -89,12 +89,12 @@ void Player::move(Vector *vecInput) {
 
 	ax = vecInput->getX() != 0 ? vecInput->getX() : ax;
 
-	// if(canJump) {
+	if(canJump) {
 		ay = vecInput->getY() != 0 ? vecInput->getY() : ay;
 		if(vecInput->getY() != 0) {
 			canJump = false;
 		}
-	// }
+	}
 
 	ay -= 0.5; // gravity
 
@@ -128,6 +128,10 @@ void Player::move(Vector *vecInput) {
 	box->setY(pos->getY());
 
 	int k = 0;
+
+	if(collision.testCollision(box, blocks, playerNumber)) {
+		canJump = true;
+	}
 
 	while(collision.testCollision(box, blocks, playerNumber)) {
 		ax = ax - reX;
@@ -173,9 +177,6 @@ void Player::move(Vector *vecInput) {
 	// 	ay = 0.0;
 	// }
 
-	// if(collision.getCollision(box, blocks, playerNumber) == 'b') {
-	// 	canJump = true;
-	// }
 	
 	// if(ax > 0) {
 	// 	ax -= 0.5;
