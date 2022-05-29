@@ -290,9 +290,59 @@ void Game::pauseGame() {
         gui.clearArea();
         mode = PLAY;
     }
+    
+    players[0].render();
+    players[0].drawTriangle();
+    draw.render(blocks, nbPlayers);
+
+    images->render(4, new Vector(25.4 * 2, 15.0 * 2), new Vector(-100.0, 0.0), true);
+    images->render(5, new Vector(25.4 * 2, 15.0 * 2), new Vector(100.0 - 25.4 * 2, 0.0), true);
+    images->render(6, new Vector(29.1 * 2, 25.0 * 2), new Vector(-29.1, -25.0), true);
+
+    //debug zoom
+    //camera.showArea();
+}
+
+void Game::renderStart() {
+    images->render(2, new Vector(382.2 * 2, 300.0 * 2), new Vector(-502.2, -300.0), false);
+    images->render(0, new Vector(78.0 * 2, 50.0 * 2), new Vector(-78.0, -50.0), false);
+
+    //debug menu
+    // gui.showArea();
+
+}
+
+void Game::renderPause() {
+    images->render(2, new Vector(382.2 * 2, 300.0 * 2), new Vector(-382.2, -300.0), false);
+    images->render(1, new Vector(93.0 * 2, 30.0 * 2), new Vector(-93.0, -30.0), false);
+
+
+    //debug menu
+    // gui.showArea();
+
+}
+
+void Game::renderWin() {
+    images->render(2, new Vector(382.2 * 2, 300.0 * 2), new Vector(-202.2, -300.0), false);
+    images->render(3, new Vector(78.0 * 2, 50.0 * 2), new Vector(-78.0, -50.0), false);
+
+    // gui.showArea();
 }
 
 void Game::setImage(Image * yimages) {
     images = yimages;
 }
 
+void Game::pauseGame() {
+    if(mode == PLAY) {
+        gui.setUpAreasPause();
+        mode = PAUSE;
+    }else if (mode == PAUSE) {
+        gui.clearArea();
+        mode = PLAY;
+    }
+}
+
+void Game::setImage(Image * yimages) {
+    images = yimages;
+}

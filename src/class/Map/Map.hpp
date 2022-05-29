@@ -1,4 +1,11 @@
+#include "../utils/Box/Box.hpp"
+#include "../Block/Block.hpp"
+#include "../utils/Vector/Vector.hpp"
 #include "Elt.hpp"
+#include "../utils/Draw/Draw.hpp"
+
+#include <iostream>
+#include <vector>
 
 #pragma once
 
@@ -6,33 +13,28 @@ using namespace std;
 
 class Map {
 	public:
-		Map(float ua, float ub, float uc, float ud);
+		Map(float width, float height);
 
-		float getA();
-		float getB();
-		float getC();
-		float getD();
+        float getWidth();
+        float getHeight();
+		Elt * getRoot();
+		void buildMap(vector<Block*>);
+		//vector<Elt *> getLeaves(vector<Elt *> leaves, Elt * node);
+		void getLeaves(Elt * node);
+		void drawMap();
 
-		Map getChildA();
-		Map getChildB();
-		Map getChildC();
-		Map getChildD();
+		vector<Block*> search(Vector*);
 
-		bool isLeaf();
-
-		Elt getElts();
+		vector<Elt *> allElt();
 		
 	private:
 
-		float a;
-		float b;
-		float c;
-		float d;
+		float w;
+		float h;
 
-		Map *childA;
-		Map *childB;
-		Map *childC;
-		Map *childD;
+        Elt * r;
 
-		Elt * elts; //list of 2D elements composing the map, max 4 elements 
+		Draw draw;
+
+		vector<Block *> leaves;
 };
