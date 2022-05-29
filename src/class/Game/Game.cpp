@@ -127,17 +127,10 @@ void Game::loadPlay() {
     win.setPlayer(&players[2], new Vector(-30.0, -48.0));
     win.setPlayer(&players[3], new Vector(-20.0, -45.0));
 
-
-    //TEMP get from map
+    
     Box * box1 = new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
     blocks.push_back(new Block(box1));
 	Box * box2 = new Box(30.0, 5.0, (-50.0) - deltaCamera->getX(), (-45.0) - deltaCamera->getY());
-
-    Block * aBlock = new Block(box2);
-    aBlock->setPosA(new Vector(-50.0, -45.0));
-    aBlock->setPosB(new Vector(50.0, 20.0));
-    aBlock->setSteps(1000.0);
-    blocks.push_back(aBlock);
 
     Box * box3 = new Box(500.0, 5.0, (0.0) - deltaCamera->getX(), (60.0) - deltaCamera->getY());
     blocks.push_back(new Block(box3));
@@ -147,6 +140,16 @@ void Game::loadPlay() {
 
     Box * box5 = new Box(5.0, 140.0, (100) - deltaCamera->getX(), (0) - deltaCamera->getY());
     blocks.push_back(new Block(box5));
+
+    map = new Map(1920, 1080);
+    map->buildMap(blocks);
+
+    Block * aBlock = new Block(box2);
+    aBlock->setPosA(new Vector(-50.0, -45.0));
+    aBlock->setPosB(new Vector(50.0, 20.0));
+    aBlock->setSteps(1000.0);
+    blocks.push_back(aBlock);
+    
 }
 
 void Game::loadIntro() {
@@ -180,7 +183,6 @@ void Game::loadIntro() {
     Box * box4 = new Box(5.0, 205.0, (-147.5) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
     blocks.push_back(new Block(box4));
 
-
 }
 
 void Game::render() {
@@ -209,6 +211,12 @@ void Game::renderPlay() {
 
     ray.setBlocks(blocks);
     ray.render();
+
+    blocksNearPlayer = map->search(players[playerNum].getPos());
+
+    for (int i = 0; i < nbPlayers; i++) {
+        players[i].setBlocks(blocksNearPlayer);
+    }
 
     players[0].render();
     players[1].render();
@@ -301,46 +309,6 @@ void Game::pauseGame() {
 
     //debug zoom
     //camera.showArea();
-}
-
-void Game::renderStart() {
-    images->render(2, new Vector(382.2 * 2, 300.0 * 2), new Vector(-502.2, -300.0), false);
-    images->render(0, new Vector(78.0 * 2, 50.0 * 2), new Vector(-78.0, -50.0), false);
-
-    //debug menu
-    // gui.showArea();
-
-}
-
-void Game::renderPause() {
-    images->render(2, new Vector(382.2 * 2, 300.0 * 2), new Vector(-382.2, -300.0), false);
-    images->render(1, new Vector(93.0 * 2, 30.0 * 2), new Vector(-93.0, -30.0), false);
-
-
-    //debug menu
-    // gui.showArea();
-
-}
-
-void Game::renderWin() {
-    images->render(2, new Vector(382.2 * 2, 300.0 * 2), new Vector(-202.2, -300.0), false);
-    images->render(3, new Vector(78.0 * 2, 50.0 * 2), new Vector(-78.0, -50.0), false);
-
-    // gui.showArea();
-}
-
-void Game::setImage(Image * yimages) {
-    images = yimages;
-}
-
-void Game::pauseGame() {
-    if(mode == PLAY) {
-        gui.setUpAreasPause();
-        mode = PAUSE;
-    }else if (mode == PAUSE) {
-        gui.clearArea();
-        mode = PLAY;
-    }
 }
 
 void Game::setImage(Image * yimages) {

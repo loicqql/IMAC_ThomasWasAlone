@@ -21,9 +21,9 @@ class Vector {
         void setAngle(float nb);
 
         void add(Vector vec);
-        void subtract(Vector vec); 
+        void subtract(Vector vec);
+        bool isIn(float areaX, float areaY, float w, float h);
 
-        
 		
 	private:
         float x;

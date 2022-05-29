@@ -14,6 +14,7 @@ class Box {
         void setY(float uy);
         void setW(float uw);
         void setH(float uh);
+        bool isIn(float areaX, float areaY, float width, float height);
 
 	private:
         float w;

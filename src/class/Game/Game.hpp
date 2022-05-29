@@ -16,6 +16,7 @@
 #include "../Camera/Camera.hpp"
 #include "../Gui/Gui.hpp"
 #include "../Win/Win.hpp"
+#include "../Map/Map.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Draw/Draw.hpp"
 #include "../utils/Area/Area.hpp"
@@ -57,7 +58,11 @@ class Game {
 		vector <Area*> actionAreas;
 		void switchMode();
 
+		vector<Block*> blocksNearPlayer;
+
 		Ray ray;
 		Win win;
 		Image * images;
+
+		Map *map;
 };
