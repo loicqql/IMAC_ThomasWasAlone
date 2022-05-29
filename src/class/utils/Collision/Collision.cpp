@@ -6,7 +6,7 @@ Collision::Collision() {}
 
 bool Collision::testCollision(Box * player, vector <Block*> blocks, int playerNumber) {
 
-	for(int i = 0; i < blocks.size(); ++i) {
+	for(uint i = 0; i < blocks.size(); ++i) {
         Block * block = blocks[i];
         Box * oneBox = block->getBox();
         
@@ -34,7 +34,7 @@ bool Collision::testCollision(Box * player, vector <Block*> blocks, int playerNu
 char Collision::getCollision(Box * player, vector <Block*> blocks, int playerNumber) {
 
 
-    for(int i = 0; i < blocks.size(); ++i) {
+    for(uint i = 0; i < blocks.size(); ++i) {
         Block * block = blocks[i];
         Box * oneBox = block->getBox();
 
@@ -60,7 +60,7 @@ char Collision::getCollision(Box * player, vector <Block*> blocks, int playerNum
 
 bool Collision::rayIntersection(vector <Block*> blocks, Vector * vec) {
 
-    for(int i = 0; i < blocks.size(); ++i) {
+    for(uint i = 0; i < blocks.size(); ++i) {
         Block * block = blocks[i];
         Box * oneBox = block->getBox();
 

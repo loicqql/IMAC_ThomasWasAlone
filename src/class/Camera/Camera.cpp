@@ -44,7 +44,7 @@ void Camera::clearAreas() {
 void Camera::testAreas(Vector * vecPos) {
     delta->setZ(1.0);
     targetZoom = 1.0;
-    for(int i = 0; i < areas.size(); ++i) {
+    for(uint i = 0; i < areas.size(); ++i) {
         Area * area = areas[i];
         if(area->test(vecPos)) {
             targetZoom = area->getZoom();
@@ -62,7 +62,7 @@ void Camera::testAreas(Vector * vecPos) {
 }
 
 void Camera::showArea() {
-    for(int i = 0; i < areas.size(); ++i) {
+    for(uint i = 0; i < areas.size(); ++i) {
         Area * area = areas[i];
 
 		float hW = area->getW() / 2;

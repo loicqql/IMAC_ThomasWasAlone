@@ -19,7 +19,7 @@ void Win::setDraw(Draw * udraw) {
 }
 
 void Win::render() {
-    for(int i = 0; i < players.size(); ++i) {
+    for(uint i = 0; i < players.size(); ++i) {
         Player * player = players[i];
         Vector * pos = winPos[i];
         Vector * shape = player->getShape();
@@ -30,7 +30,7 @@ void Win::render() {
 }
 
 bool Win::testWin() {
-    for(int i = 0; i < players.size(); ++i) {
+    for(uint i = 0; i < players.size(); ++i) {
         Player * player = players[i];
         Vector * posWin = winPos[i];
         Vector * shape = player->getShape();

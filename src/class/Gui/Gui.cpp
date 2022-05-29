@@ -33,7 +33,7 @@ void Gui::clearArea() {
 }
 
 bool Gui::testAreas(Vector * vecClick) {
-    for(int i = 0; i < areas.size(); ++i) {
+    for(uint i = 0; i < areas.size(); ++i) {
         Area * area = areas[i];
         float hW = area->getW() / 2;
 		float hH = area->getH() / 2;
@@ -47,7 +47,7 @@ bool Gui::testAreas(Vector * vecClick) {
 }
 
 void Gui::showArea() {
-    for(int i = 0; i < areas.size(); ++i) {
+    for(uint i = 0; i < areas.size(); ++i) {
         Area * area = areas[i];
 
 		float hW = area->getW() / 2;

@@ -56,7 +56,7 @@ void Game::handleClick(Vector * vecClick) {
 //Press Enter
 void Game::handleAction() {
     if(mode == INTRO) {
-        for(int i = 0; i < actionAreas.size(); ++i) {
+        for(uint i = 0; i < actionAreas.size(); ++i) {
             Area * area = actionAreas[i];
             if(area->test(players[playerNum].getPos())) {
                 switch (area->getAction()) {
@@ -206,7 +206,7 @@ void Game::renderPlay() {
 
     players[playerNum].drawTriangle();
 
-    for(int i = nbPlayers; i < blocks.size(); ++i) {
+    for(uint i = nbPlayers; i < blocks.size(); ++i) {
         Block * block = blocks[i];
         block->updateMovement();
     }
@@ -229,7 +229,7 @@ void Game::renderIntro() {
 
     ray.setBlocks(blocks);
     ray.render();
-    for(int i = 0; i < actionAreas.size(); ++i) {
+    for(uint i = 0; i < actionAreas.size(); ++i) {
         draw.drawDoor(actionAreas[i]);
     }
     

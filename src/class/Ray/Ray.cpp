@@ -42,7 +42,7 @@ void Ray::render() {
     //GET ALL CORNERS
     float W;
     float H;
-    for(int i = 0; i < blocks.size(); ++i) {
+    for(uint i = 0; i < blocks.size(); ++i) {
         Block * block = blocks[i];
         Box * oneBox = block->getBox();
         W = oneBox->getW() / 2 - 0.15;
@@ -64,7 +64,7 @@ void Ray::render() {
     vector <Vector*> intersects;
 
     //CAST RAYS IN CORNERS
-    for(int i = 0; i < corners.size(); ++i)  {
+    for(uint i = 0; i < corners.size(); ++i)  {
         double angle = atan2f(corners[i]->getY() - vec->getY(), corners[i]->getX() - vec->getX());
         for (int j = 0; j < 2000; j++) {
             vec->add(Vector(0.5 * cos(angle), (0.5 * sin(angle))));
@@ -78,7 +78,7 @@ void Ray::render() {
         vec = new Vector(vecPos->getX(), vecPos->getY());
     }
 
-    for(int i = 0; i < corners.size(); ++i)  {
+    for(uint i = 0; i < corners.size(); ++i)  {
         double angle = atan2f(corners[i]->getY() - vec->getY(), corners[i]->getX() - vec->getX());
         for (int j = 0; j < 2000; j++) {
             vec->add(Vector(0.5 * cos(angle), (0.5 * sin(angle))));
@@ -106,7 +106,7 @@ void Ray::render() {
 
     glVertex2d((vec->getX() - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - deltaCamera->getY()) / deltaCamera->getZ());
 
-    for(int i = 0; i < intersects.size(); ++i) {
+    for(uint i = 0; i < intersects.size(); ++i) {
         Vector * intersect = intersects[i];
 
         
