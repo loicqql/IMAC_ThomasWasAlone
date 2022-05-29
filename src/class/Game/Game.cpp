@@ -260,7 +260,7 @@ void Game::renderStart() {
 
 void Game::renderPause() {
 
-    images->render(1);
+    images->render(1, new Vector(93.0, 30.0), new Vector(-46.5, -15.0), false);
 
 
     //debug menu
@@ -269,7 +269,6 @@ void Game::renderPause() {
 }
 
 void Game::renderWin() {
-    images->render(1);
     gui.showArea();
 }
 

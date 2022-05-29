@@ -19,7 +19,7 @@ class Image {
 	public:
         Image();
 
-        void render(int index);
+        void render(int index, Vector * shape, Vector * pos, bool camera);
 		void setDelta(Vector * delta);
         void push(GLuint * ytextures);
 		GLuint * getTextures();
