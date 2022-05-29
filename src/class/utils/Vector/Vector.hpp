@@ -1,5 +1,9 @@
 #pragma once
-#include <GL/glu.h>
+#if defined(__APPLE__)
+    #include <OpenGL/glu.h>
+    #else
+    #include <GL/glu.h>
+#endif
 
 using namespace std;
 
@@ -9,17 +13,21 @@ class Vector {
         
         float getX();
         float getY();
+
         float getZ();
+        float getAngle();
 
         void setZ(float nb);
+        void setAngle(float nb);
 
         void add(Vector vec);
         void subtract(Vector vec); 
 
-        bool isIn(float areaX, float areaY, float w, float h);
+        
 		
 	private:
         float x;
         float y;
         float z;
+        float angle;
 };

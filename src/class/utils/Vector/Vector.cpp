@@ -20,8 +20,16 @@ float Vector::getZ() {
     return z;
 }
 
+float Vector::getAngle() {
+    return angle;
+}
+
 void Vector::setZ(float nb) {
     z = nb;
+}
+
+void Vector::setAngle(float nb) {
+    angle = nb;
 }
 
 void Vector::add(Vector vec) {
@@ -32,11 +40,4 @@ void Vector::add(Vector vec) {
 void Vector::subtract(Vector vec) {
     x -= vec.getX();
     y -= vec.getY();
-}
-
-bool Vector::isIn(float areaX, float areaY, float w, float h){
-    if(x >= areaX-w/2 && x <= areaX + w/2 && y >= areaY - h/2 && y <= areaY+h/2){
-        return true;
-    }
-    return false;    
 }
