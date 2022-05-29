@@ -63,12 +63,12 @@ void Game::handleAction() {
                 case STARTLEVEL1:
                         mode = PLAY;
                         blocks.clear();
-                        loadPlay();
+                        loadPlay(true);
                     break;
                 case STARTLEVEL2:
                         mode = PLAY;
                         blocks.clear();
-                        loadPlay();
+                        loadPlay(false);
                     break;
                 }
             }
@@ -101,7 +101,7 @@ void Game::switchMode() {
     }
 }
 
-void Game::loadPlay() {
+void Game::loadPlay(bool levelOne) {
     playerNum = 0;
     camera.clearAreas();
     images->setDelta(deltaCamera);
@@ -122,33 +122,14 @@ void Game::loadPlay() {
     players[2].setShape(new Vector(9.0, 2.0));
     players[3].setShape(new Vector(5.0, 5.0));
 
-    win.setPlayer(&players[0], new Vector(-50.0, -40.0));
-    win.setPlayer(&players[1], new Vector(-40.0, -41.0));
-    win.setPlayer(&players[2], new Vector(-30.0, -48.0));
-    win.setPlayer(&players[3], new Vector(-20.0, -45.0));
+    if(levelOne) {
 
-    
-    Box * box1 = new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
-    blocks.push_back(new Block(box1));
-	Box * box2 = new Box(30.0, 5.0, (-50.0) - deltaCamera->getX(), (-45.0) - deltaCamera->getY());
+        setBlocksLevel1();
 
-    Box * box3 = new Box(500.0, 5.0, (0.0) - deltaCamera->getX(), (60.0) - deltaCamera->getY());
-    blocks.push_back(new Block(box3));
-
-    Box * box4 = new Box(5.0, 140.0, (-100) - deltaCamera->getX(), (0) - deltaCamera->getY());
-    blocks.push_back(new Block(box4));
-
-    Box * box5 = new Box(5.0, 140.0, (100) - deltaCamera->getX(), (0) - deltaCamera->getY());
-    blocks.push_back(new Block(box5));
-
-    map = new Map(1920, 1080);
-    map->buildMap(blocks);
-
-    Block * aBlock = new Block(box2);
-    aBlock->setPosA(new Vector(-50.0, -45.0));
-    aBlock->setPosB(new Vector(50.0, 20.0));
-    aBlock->setSteps(1000.0);
-    blocks.push_back(aBlock);
+    }else {
+        
+        setBlocksLevel2();
+    }
     
 }
 
@@ -313,4 +294,103 @@ void Game::pauseGame() {
 
 void Game::setImage(Image * yimages) {
     images = yimages;
+}
+
+
+void Game::setBlocksLevel1() {
+    win.setPlayer(&players[0], new Vector(110.0, 37.0));
+    win.setPlayer(&players[1], new Vector(180.0, -35.0));
+    win.setPlayer(&players[2], new Vector(235.0, 52.0));
+    win.setPlayer(&players[3], new Vector(-20.0, 32.0));
+
+    Box * box1 = new Box(357.0, 5.0, (121.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box1));
+
+    Box * box2 = new Box(15.0, 200, (-50.0) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box2));
+
+    Box * box3 = new Box(50, 50, (125.0) - deltaCamera->getX(), (-25.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box3));
+
+    Box * box4 = new Box(15, 15, (75.0) - deltaCamera->getX(), (-43.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box4));
+    
+    Box * box5 = new Box(100, 10, (200.0) - deltaCamera->getX(), (-45.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box5));
+
+    Box * box6 = new Box(75, 100, (260.0) - deltaCamera->getX(), (0.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box6));
+
+    Box * box7 = new Box(35, 75, (-25.0) - deltaCamera->getX(), (-10.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box7));
+
+    Box * box10 = new Box(15, 200, (292.5) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box10));
+
+    Box * box11 = new Box(400, 15, (0.0) - deltaCamera->getX(), (175.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box11));
+
+    map = new Map(1920, 1080);
+    map->buildMap(blocks);
+
+    Box * box8 = new Box(30, 5, (50.0) - deltaCamera->getX(), (5.0) - deltaCamera->getY());
+    Block * block1 = new Block(box8);
+    block1->setPosA(new Vector(50.0, 5.0));
+    block1->setPosB(new Vector(130.0, 5.0));
+    block1->setSteps(1000.0);
+    blocks.push_back(block1);
+
+    Box * box9 = new Box(30, 5, (110.0) - deltaCamera->getX(), (30.0) - deltaCamera->getY());
+    Block * block2 = new Block(box9);
+    block2->setPosA(new Vector(110.0, 30.0));
+    block2->setPosB(new Vector(180.0, 30.0));
+    block2->setSteps(1000.0);
+    blocks.push_back(block2);
+}
+
+void Game::setBlocksLevel2() {
+    win.setPlayer(&players[0], new Vector(110.0, -43.0));
+    win.setPlayer(&players[1], new Vector(145.0, 22.0));
+    win.setPlayer(&players[2], new Vector(15.0, -10.0));
+    win.setPlayer(&players[3], new Vector(-20.0, 42.5));
+
+    Box * box1 = new Box(357.0, 5.0, (121.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box1));
+    Box * box2 = new Box(15.0, 200, (-50.0) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box2));
+    Box * box3 = new Box(20, 28, (50.0) - deltaCamera->getX(), (-17.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box3));
+    Box * box4 = new Box(110, 15, (0.0) - deltaCamera->getX(), (-45.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box4));
+    Box * box5 = new Box(25, 5, (75.0) - deltaCamera->getX(), (-28.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box5));
+    Box * box6 = new Box(25, 5, (150.0) - deltaCamera->getX(), (15.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box6));
+
+    Box * box8 = new Box(50, 5, (-20.0) - deltaCamera->getX(), (22.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box8));
+    Box * box9 = new Box(25, 5, (-20.0) - deltaCamera->getX(), (37.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box9));
+    Box * box10 = new Box(34, 5, (-12.0) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box10));
+    Box * box11 = new Box(5, 15, (-30.0) - deltaCamera->getX(), (45.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box11));
+    Box * box12 = new Box(5, 30, (2.5) - deltaCamera->getX(), (37.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box12));
+
+    Box * box13 = new Box(15.0, 200, (170.0) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box13));
+
+    Box * box14 = new Box(400, 15, (0.0) - deltaCamera->getX(), (100.0) - deltaCamera->getY());
+    blocks.push_back(new Block(box14));
+
+    map = new Map(1920, 1080);
+    map->buildMap(blocks);
+
+    Box * box7 = new Box(30, 5, (35.0) - deltaCamera->getX(), (30.0) - deltaCamera->getY());
+    Block * block1 = new Block(box7);
+    block1->setPosA(new Vector(35.0, 30.0));
+    block1->setPosB(new Vector(110.0, 30.0));
+    block1->setSteps(1000.0);
+    blocks.push_back(block1);
 }

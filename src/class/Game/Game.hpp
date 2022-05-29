@@ -33,7 +33,7 @@ class Game {
 		void movePlayer(Vector * vecInput);
 		void handleClick(Vector * vecClick);
 		void render();
-		void loadPlay();
+		void loadPlay(bool levelOne);
 		void loadIntro();
 		void renderPlay();
 		void renderPause();
@@ -65,4 +65,7 @@ class Game {
 		Image * images;
 
 		Map *map;
+
+		void setBlocksLevel1();
+		void setBlocksLevel2();
 };
