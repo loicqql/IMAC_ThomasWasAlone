@@ -3,7 +3,7 @@
 using namespace std;
 
 Ray::Ray() {
-    vecPos = new Vector(0.0, 50.0);
+    vecPos = new Vector(40.0, 60.0);
 }
 
 bool sortVector(Vector * v1, Vector * v2) {
@@ -25,7 +25,7 @@ void Ray::render() {
 
     Vector * vec = new Vector(vecPos->getX(), vecPos->getY());
 
-    /*
+    
     float hW = 4.0 / 2;
     float hH = 4.0 / 2;
     glColor3f(255 / 44.0, 255 / 55.0, 255 / 101.0);
@@ -35,7 +35,7 @@ void Ray::render() {
         glVertex2d((vec->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
 		glVertex2d((vec->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
     glEnd();
-    */
+    
 
     vector <Vector*> corners;
 

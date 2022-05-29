@@ -102,13 +102,16 @@ void Game::switchMode() {
 }
 
 void Game::loadPlay(bool levelOne) {
+    for (int i = 0; i < nbPlayers; i++) {
+        players[i].setPos(new Vector(10.0 * i + 10.0, 0.0));
+    }
     playerNum = 0;
     camera.clearAreas();
     images->setDelta(deltaCamera);
     actionAreas.clear();
     nbPlayers = 4;
     for (int i = 0; i < nbPlayers; i++) {
-        players[i].setPos(new Vector(10.0 * i, 0.0));
+        players[i].setPos(new Vector(10.0 * i + 10.0, 0.0));
         players[i].setPlayerNumber(i);
         blocks.push_back(new Block(players[i].getBox()));
     }
@@ -134,6 +137,9 @@ void Game::loadPlay(bool levelOne) {
 }
 
 void Game::loadIntro() {
+    for (int i = 0; i < nbPlayers; i++) {
+        players[i].setPos(new Vector(10.0 * i + 10.0, 0.0));
+    }
     playerNum = 0;
     camera.clearAreas();
     camera.addAreas(new Area(50, 50, 0, -25, 0.7));
@@ -303,7 +309,7 @@ void Game::setBlocksLevel1() {
     win.setPlayer(&players[2], new Vector(235.0, 52.0));
     win.setPlayer(&players[3], new Vector(-20.0, 32.0));
 
-    Box * box1 = new Box(357.0, 5.0, (121.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
+    Box * box1 = new Box(357.0, 20.0, (121.0) - deltaCamera->getX(), (-60.0) - deltaCamera->getY());
     blocks.push_back(new Block(box1));
 
     Box * box2 = new Box(15.0, 200, (-50.0) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
@@ -321,7 +327,7 @@ void Game::setBlocksLevel1() {
     Box * box6 = new Box(75, 100, (260.0) - deltaCamera->getX(), (0.0) - deltaCamera->getY());
     blocks.push_back(new Block(box6));
 
-    Box * box7 = new Box(35, 75, (-25.0) - deltaCamera->getX(), (-10.0) - deltaCamera->getY());
+    Box * box7 = new Box(35, 75, (-25.0) - deltaCamera->getX(), (-20.0) - deltaCamera->getY());
     blocks.push_back(new Block(box7));
 
     Box * box10 = new Box(15, 200, (292.5) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
@@ -354,7 +360,7 @@ void Game::setBlocksLevel2() {
     win.setPlayer(&players[2], new Vector(15.0, -10.0));
     win.setPlayer(&players[3], new Vector(-20.0, 42.5));
 
-    Box * box1 = new Box(357.0, 5.0, (121.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
+    Box * box1 = new Box(357.0, 20.0, (121.0) - deltaCamera->getX(), (-60.0) - deltaCamera->getY());
     blocks.push_back(new Block(box1));
     Box * box2 = new Box(15.0, 200, (-50.0) - deltaCamera->getX(), (50.0) - deltaCamera->getY());
     blocks.push_back(new Block(box2));
