@@ -25,6 +25,14 @@ float Box::getY() {
     return y;
 }
 
+void Box::setW(float uw) {
+    w = uw;
+}
+
+void Box::setH(float uh) {
+    h = uh;
+}
+
 void Box::setX(float ux) {
     x = ux;
 }

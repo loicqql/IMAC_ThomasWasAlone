@@ -21,6 +21,9 @@ class Player {
 		Vector * getPos();
 		void setDelta(Vector * delta);
 		void setColor(Color * newColor);
+		Color * getColor();
+		void setShape(Vector * shape);
+		Vector * getShape();
 		void drawTriangle();
 		void setBlocks(vector <Block*> blks);
 		Box * getBox();

@@ -18,6 +18,7 @@ class Draw {
 		void render(vector <Block*> blocks, int nbPlayers);
 		void render(Block * block);
 		void drawDoor(Area * area);
+		void drawWin(Area * area, Color * color);
 
 	private:
 		Vector * deltaCamera;

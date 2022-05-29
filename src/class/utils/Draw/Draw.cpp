@@ -50,3 +50,15 @@ void Draw::drawDoor(Area * area) {
     glEnd();
     
 }
+
+void Draw::drawWin(Area * area, Color * color) {
+    float hW = area->getW() / 2;
+    float hH = area->getH() / 2;
+    glColor3f(color->getR(), color->getG(), color->getB());
+    glBegin(GL_LINE_LOOP);
+        glVertex2d((area->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (area->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
+        glVertex2d((area->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (area->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+        glVertex2d((area->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (area->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+		glVertex2d((area->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (area->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
+    glEnd();
+}

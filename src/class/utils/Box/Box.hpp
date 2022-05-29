@@ -12,6 +12,8 @@ class Box {
         float getY();
         void setX(float ux);
         void setY(float uy);
+        void setW(float uw);
+        void setH(float uh);
 
 	private:
         float w;

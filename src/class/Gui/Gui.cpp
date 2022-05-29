@@ -21,6 +21,13 @@ void Gui::setUpAreasPause() {
     areas.push_back(area1);
 }
 
+void Gui::setUpAreasWin() { 
+
+    areas.clear();
+    Area * area1 = new Area(100.0, 50.0, 0, 0, 1.0);
+    areas.push_back(area1);
+}
+
 void Gui::clearArea() {
     areas.clear();
 }

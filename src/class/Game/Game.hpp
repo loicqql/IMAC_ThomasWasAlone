@@ -4,6 +4,7 @@
 #define PLAY 2
 #define PAUSE 1
 #define START 0
+#define WIN 4
 
 #define STARTLEVEL1 101
 #define STARTLEVEL2 102
@@ -14,6 +15,7 @@
 #include "../Block/Block.hpp"
 #include "../Camera/Camera.hpp"
 #include "../Gui/Gui.hpp"
+#include "../Win/Win.hpp"
 #include "../utils/Vector/Vector.hpp"
 #include "../utils/Draw/Draw.hpp"
 #include "../utils/Area/Area.hpp"
@@ -36,6 +38,7 @@ class Game {
 		void renderPause();
 		void renderStart();
 		void renderIntro();
+		void renderWin();
 		void switchPlayer();
 		void pauseGame();
 		void handleAction();
@@ -52,7 +55,9 @@ class Game {
 		vector <Block*> blocks;
 		int mode;
 		vector <Area*> actionAreas;
+		void switchMode();
 
 		Ray ray;
+		Win win;
 		Image * images;
 };

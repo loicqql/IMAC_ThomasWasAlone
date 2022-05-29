@@ -24,6 +24,17 @@ void Player::setPlayerNumber(int nb) {
 	playerNumber = nb;
 }
 
+void Player::setShape(Vector * shape) {
+	w = shape->getX();
+    h = shape->getY();
+	box->setW(shape->getX());
+    box->setH(shape->getY());
+}
+
+Vector * Player::getShape() {
+	return new Vector(w, h);
+}
+
 Vector * Player::getPos() {
 	return pos;
 }
@@ -42,6 +53,10 @@ void Player::setDelta(Vector * delta) {
 
 void Player::setColor(Color * newColor) {
 	color = newColor;
+}
+
+Color * Player::getColor() {
+	return color;
 }
 
 void Player::render() {
@@ -147,10 +162,10 @@ void Player::move(Vector *vecInput) {
 	}
 		
 
-	cout << "-----" << endl;
-	cout << ax << endl;
-	cout << ay << endl;
-	cout << "-----" << endl;
+	// cout << "-----" << endl;
+	// cout << ax << endl;
+	// cout << ay << endl;
+	// cout << "-----" << endl;
 
 	// if(!collision.testCollision(box, blocks, playerNumber)) {
 		

@@ -5,6 +5,7 @@ using namespace std;
 Game::Game() {
     mode = START;
     deltaCamera = camera.getDelta();
+    win.setDraw(&draw);
     playerNum = 0;
     nbPlayers = 4;
 
@@ -33,28 +34,75 @@ void Game::movePlayer(Vector * vecInput) {
     }
 }
 
+void Game::switchPlayer() {
+    if(mode == PLAY) {
+        if(playerNum < 3) {
+            ++playerNum;
+        }else {
+            playerNum = 0;
+        }
+    }
+}
+
+//Click
 void Game::handleClick(Vector * vecClick) {
-    if(mode == START || mode == PAUSE) {
+    if(mode == START || mode == PAUSE || mode == WIN) {
         if(gui.testAreas(vecClick)) {
-            switch (mode) {
-                case START:
-                    mode = INTRO;
-                    gui.clearArea();
-                    blocks.clear();
-                    loadIntro();
-                    break;
-                case PAUSE:
-                    gui.clearArea();
-                    mode = PLAY;
-                    break;
-                default:
-                    break;
-            }
+            switchMode();
         }
     }    
 }
 
+//Press Enter
+void Game::handleAction() {
+    if(mode == INTRO) {
+        for(int i = 0; i < actionAreas.size(); ++i) {
+            Area * area = actionAreas[i];
+            if(area->test(players[playerNum].getPos())) {
+                switch (area->getAction()) {
+                case STARTLEVEL1:
+                        mode = PLAY;
+                        blocks.clear();
+                        loadPlay();
+                    break;
+                case STARTLEVEL2:
+                        mode = PLAY;
+                        blocks.clear();
+                        loadPlay();
+                    break;
+                }
+            }
+        }
+    }else {
+        switchMode();
+    }    
+}
+
+void Game::switchMode() {
+    switch (mode) {
+        case START:
+            mode = INTRO;
+            gui.clearArea();
+            blocks.clear();
+            loadIntro();
+            break;
+        case PAUSE:
+            gui.clearArea();
+            mode = PLAY;
+            break;
+        case WIN:
+            mode = INTRO;
+            gui.clearArea();
+            blocks.clear();
+            loadIntro();
+            break;
+        default:
+            break;
+    }
+}
+
 void Game::loadPlay() {
+    playerNum = 0;
     camera.clearAreas();
     images->setDelta(deltaCamera);
     actionAreas.clear();
@@ -69,6 +117,16 @@ void Game::loadPlay() {
     players[1].setColor(new Color(0.0, 1.0, 0.0));
     players[2].setColor(new Color(0.0, 0.0, 1.0));
     players[3].setColor(new Color(0.5, 0.5, 0.5));
+
+    players[1].setShape(new Vector(2.0, 9.0));
+    players[2].setShape(new Vector(9.0, 2.0));
+    players[3].setShape(new Vector(5.0, 5.0));
+
+    win.setPlayer(&players[0], new Vector(-50.0, -40.0));
+    win.setPlayer(&players[1], new Vector(-40.0, -41.0));
+    win.setPlayer(&players[2], new Vector(-30.0, -48.0));
+    win.setPlayer(&players[3], new Vector(-20.0, -45.0));
+
 
     //TEMP get from map
     Box * box1 = new Box(2000.0, 5.0, (0.0) - deltaCamera->getX(), (-50.0) - deltaCamera->getY());
@@ -92,6 +150,7 @@ void Game::loadPlay() {
 }
 
 void Game::loadIntro() {
+    playerNum = 0;
     camera.clearAreas();
     camera.addAreas(new Area(50, 50, 0, -25, 0.7));
     images->setDelta(deltaCamera);
@@ -124,13 +183,25 @@ void Game::loadIntro() {
 
 }
 
-void Game::pauseGame() {
-    if(mode == PLAY) {
-        gui.setUpAreasPause();
-        mode = PAUSE;
-    }else if (mode == PAUSE) {
-        gui.clearArea();
-        mode = PLAY;
+void Game::render() {
+    switch (mode) {
+        case START:
+            renderStart();
+            break;
+        case INTRO:
+            renderIntro();
+            break;
+        case PAUSE:
+            renderPause();
+            break;
+        case PLAY:
+            renderPlay();
+            break;
+        case WIN:
+            renderWin();
+            break;
+        default:
+            break;
     }
 }
 
@@ -152,6 +223,13 @@ void Game::renderPlay() {
     }
 
     draw.render(blocks, nbPlayers);
+
+    win.render();
+
+    if(win.testWin()) {
+        gui.setUpAreasWin();
+        mode = WIN;
+    }
 
     //debug zoom
     camera.showArea();
@@ -190,52 +268,18 @@ void Game::renderPause() {
 
 }
 
-void Game::render() {
-    switch (mode) {
-        case START:
-            renderStart();
-            break;
-        case INTRO:
-            renderIntro();
-            break;
-        case PAUSE:
-            renderPause();
-            break;
-        case PLAY:
-            renderPlay();
-            break;
-        default:
-            break;
-    }
+void Game::renderWin() {
+    images->render(1);
+    gui.showArea();
 }
 
-void Game::switchPlayer() {
+void Game::pauseGame() {
     if(mode == PLAY) {
-        if(playerNum < 3) {
-            ++playerNum;
-        }else {
-            playerNum = 0;
-        }
-    }
-}
-
-void Game::handleAction() {
-    for(int i = 0; i < actionAreas.size(); ++i) {
-        Area * area = actionAreas[i];
-        if(area->test(players[playerNum].getPos())) {
-            switch (area->getAction()) {
-            case STARTLEVEL1:
-                    mode = PLAY;
-                    blocks.clear();
-                    loadPlay();
-                break;
-            case STARTLEVEL2:
-                    mode = PLAY;
-                    blocks.clear();
-                    loadPlay();
-                break;
-            }
-        }
+        gui.setUpAreasPause();
+        mode = PAUSE;
+    }else if (mode == PAUSE) {
+        gui.clearArea();
+        mode = PLAY;
     }
 }
 
