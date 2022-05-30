@@ -26,15 +26,15 @@ void Ray::render() {
     Vector * vec = new Vector(vecPos->getX(), vecPos->getY());
 
     
-    float hW = 4.0 / 2;
-    float hH = 4.0 / 2;
-    glColor3f(255 / 44.0, 255 / 55.0, 255 / 101.0);
-    glBegin(GL_POLYGON);
-        glVertex2d((vec->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
-        glVertex2d((vec->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
-        glVertex2d((vec->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
-		glVertex2d((vec->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
-    glEnd();
+    // float hW = 4.0 / 2;
+    // float hH = 4.0 / 2;
+    // glColor3f(255 / 44.0, 255 / 55.0, 255 / 101.0);
+    // glBegin(GL_POLYGON);
+    //     glVertex2d((vec->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
+    //     glVertex2d((vec->getX() + hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+    //     glVertex2d((vec->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() - hH - deltaCamera->getY()) / deltaCamera->getZ());
+	// 	glVertex2d((vec->getX() - hW - deltaCamera->getX()) / deltaCamera->getZ(), (vec->getY() + hH - deltaCamera->getY()) / deltaCamera->getZ());
+    // glEnd();
     
 
     vector <Vector*> corners;

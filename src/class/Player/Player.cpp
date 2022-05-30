@@ -96,8 +96,6 @@ void Player::move(Vector *vecInput) {
 		}
 	}
 
-	ay -= 0.5; // gravity
-
 	//CAP AX AY
 	ax = ax > 3.0 ? 3.0 : ax;
 	ax = ax < -3.0 ? -3.0 : ax;
@@ -131,11 +129,14 @@ void Player::move(Vector *vecInput) {
 
 	if(collision.testCollision(box, blocks, playerNumber)) {
 		canJump = true;
+		ax = 0.0;
+		ay = 0.0;
 	}
 
+	ay -= 0.5; // gravity
+
 	while(collision.testCollision(box, blocks, playerNumber)) {
-		ax = ax - reX;
-		ay = ay - reY;
+		
 		pos->subtract(Vector(reX, reY));
 		box->setX(pos->getX());
 		box->setY(pos->getY());
@@ -149,21 +150,21 @@ void Player::move(Vector *vecInput) {
 		ay = 0.0;
 	}
 
-	if(ax > 0) {
-		if(ax > 0.5) {
-			ax -= 0.5;
-		}else {
-			ax = 0.0;
-		}
-	}
+	// if(ax > 0) {
+	// 	if(ax > 0.5) {
+	// 		ax -= 0.5;
+	// 	}else {
+	// 		ax = 0.0;
+	// 	}
+	// }
 
-	if(ax < 0) {
-		if(ax < -0.5) {
-			ax += 0.5;
-		}else {
-			ax = 0.0;
-		}
-	}
+	// if(ax < 0) {
+	// 	if(ax < -0.5) {
+	// 		ax += 0.5;
+	// 	}else {
+	// 		ax = 0.0;
+	// 	}
+	// }
 		
 
 	// cout << "-----" << endl;

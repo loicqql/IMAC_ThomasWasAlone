@@ -102,16 +102,13 @@ void Game::switchMode() {
 }
 
 void Game::loadPlay(bool levelOne) {
-    for (int i = 0; i < nbPlayers; i++) {
-        players[i].setPos(new Vector(10.0 * i + 10.0, 0.0));
-    }
     playerNum = 0;
     camera.clearAreas();
     images->setDelta(deltaCamera);
     actionAreas.clear();
     nbPlayers = 4;
     for (int i = 0; i < nbPlayers; i++) {
-        players[i].setPos(new Vector(10.0 * i + 10.0, 0.0));
+        players[i].setPos(new Vector((10.0 * i + 10.0 - deltaCamera->getX()) / deltaCamera->getZ(), (0.0 - deltaCamera->getY()) / deltaCamera->getZ()));
         players[i].setPlayerNumber(i);
         blocks.push_back(new Block(players[i].getBox()));
     }
@@ -138,7 +135,7 @@ void Game::loadPlay(bool levelOne) {
 
 void Game::loadIntro() {
     for (int i = 0; i < nbPlayers; i++) {
-        players[i].setPos(new Vector(10.0 * i + 10.0, 0.0));
+        players[i].setPos(new Vector((10.0 * i + 10.0 - deltaCamera->getX()) / deltaCamera->getZ(), (0.0 - deltaCamera->getY()) / deltaCamera->getZ()));
     }
     playerNum = 0;
     camera.clearAreas();
@@ -355,6 +352,9 @@ void Game::setBlocksLevel1() {
 }
 
 void Game::setBlocksLevel2() {
+    for (int i = 0; i < nbPlayers; i++) {
+        players[i].setPos(new Vector((10.0 * i - deltaCamera->getX()) / deltaCamera->getZ(), (0.0 - deltaCamera->getY()) / deltaCamera->getZ()));
+    }
     win.setPlayer(&players[0], new Vector(110.0, -43.0));
     win.setPlayer(&players[1], new Vector(145.0, 22.0));
     win.setPlayer(&players[2], new Vector(15.0, -10.0));
