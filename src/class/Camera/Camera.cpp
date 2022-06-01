@@ -9,6 +9,10 @@ Camera::Camera() {
     delta->setZ(1.0);
 }
 
+void Camera::resetCamera() {
+    delta->subtract(Vector(delta->getX(),delta->getY()));
+}
+
 Vector * Camera::getDelta() {
     return delta;
 }

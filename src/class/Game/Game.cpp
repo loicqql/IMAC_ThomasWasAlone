@@ -122,6 +122,9 @@ void Game::loadPlay(bool levelOne) {
     players[2].setShape(new Vector(9.0, 2.0));
     players[3].setShape(new Vector(5.0, 5.0));
 
+    camera.resetCamera();
+    win.clear();
+
     if(levelOne) {
 
         setBlocksLevel1();
@@ -134,6 +137,7 @@ void Game::loadPlay(bool levelOne) {
 }
 
 void Game::loadIntro() {
+    camera.resetCamera();
     for (int i = 0; i < nbPlayers; i++) {
         players[i].setPos(new Vector((10.0 * i + 10.0 - deltaCamera->getX()) / deltaCamera->getZ(), (0.0 - deltaCamera->getY()) / deltaCamera->getZ()));
     }
@@ -304,7 +308,7 @@ void Game::setBlocksLevel1() {
     win.setPlayer(&players[0], new Vector(110.0, 37.0));
     win.setPlayer(&players[1], new Vector(180.0, -35.0));
     win.setPlayer(&players[2], new Vector(235.0, 52.0));
-    win.setPlayer(&players[3], new Vector(-20.0, 32.0));
+    win.setPlayer(&players[3], new Vector(-20.0, 21.0));
 
     Box * box1 = new Box(357.0, 20.0, (121.0) - deltaCamera->getX(), (-60.0) - deltaCamera->getY());
     blocks.push_back(new Block(box1));
@@ -355,9 +359,9 @@ void Game::setBlocksLevel2() {
     for (int i = 0; i < nbPlayers; i++) {
         players[i].setPos(new Vector((10.0 * i - deltaCamera->getX()) / deltaCamera->getZ(), (0.0 - deltaCamera->getY()) / deltaCamera->getZ()));
     }
-    win.setPlayer(&players[0], new Vector(110.0, -43.0));
+    win.setPlayer(&players[0], new Vector(110.0, -46.0));
     win.setPlayer(&players[1], new Vector(145.0, 22.0));
-    win.setPlayer(&players[2], new Vector(15.0, -10.0));
+    win.setPlayer(&players[2], new Vector(50.0, -1.0));
     win.setPlayer(&players[3], new Vector(-20.0, 42.5));
 
     Box * box1 = new Box(357.0, 20.0, (121.0) - deltaCamera->getX(), (-60.0) - deltaCamera->getY());

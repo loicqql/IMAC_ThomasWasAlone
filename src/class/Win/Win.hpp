@@ -20,6 +20,6 @@ class Win {
 		
 	private:
 		vector <Player*> players;
-        vector <Vector *> winPos;
+        vector <Vector*> winPos;
         Draw * draw;
 };

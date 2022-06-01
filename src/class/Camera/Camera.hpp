@@ -23,6 +23,7 @@ class Camera {
 		void testAreas(Vector * vecPos);
 		void addAreas(Area * area);
 		void clearAreas();
+		void resetCamera();
 
 		//debug
 		void showArea();

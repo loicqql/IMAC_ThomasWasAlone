@@ -11,7 +11,12 @@ void Win::setPlayer(Player * player, Vector * vectorPosWin) {
 }
 
 void Win::clear() {
-    players.clear();
+    if(players.empty()) {
+        players.clear();
+    }
+    if(winPos.empty()) {
+        winPos.clear();
+    }
 }
 
 void Win::setDraw(Draw * udraw) {
